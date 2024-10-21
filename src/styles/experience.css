@@ -62,18 +62,33 @@
   align-items: center;
   justify-content: center;
   color: white;
-  z-index: 2; 
+  z-index: 2;
 }
 
-.card-diskominfo:hover h1, .card-diskominfo:hover p,
-.card-sritex:hover h1, .card-sritex:hover p {
-    opacity: 1;
+.card-diskominfo:hover h1,
+.card-diskominfo:hover p,
+.card-sritex:hover h1,
+.card-sritex:hover p {
+  opacity: 1;
 }
 
-.card-diskominfo h1, .card-diskominfo p,
-.card-sritex h1, .card-sritex p{
-    opacity: 0;
-    text-align: center;
-    z-index: 2;
-    transition: 0.5s;
+.card-diskominfo h1,
+.card-diskominfo p,
+.card-sritex h1,
+.card-sritex p {
+  opacity: 0;
+  text-align: center;
+  z-index: 2;
+  transition: 0.5s;
+}
+
+@media (max-width: 576px) {
+  .skill-page {
+    flex-direction: column;
+  }
+  .card-diskominfo,
+  .card-sritex {
+    width: 70vw;
+    height: 40vh;
+  }
 }

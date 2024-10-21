@@ -111,3 +111,16 @@ header {
 .hamburger.open .bar:nth-child(3) {
   transform: rotate(-45deg) translate(5px, -5px);
 }
+
+@media (max-width: 576px) {
+  .nav-links.show {
+    background-color: #1e272e;
+    margin-right: 30px;
+    flex-direction: column;
+    max-height: 200px;
+  }
+  .hamburger{
+    position: absolute;
+    right: 10px;
+  }
+}

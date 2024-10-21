@@ -28,3 +28,15 @@
 .live{
     font-size: 2rem;
 }
+
+@media (max-width: 576px) {
+    .name{
+        font-size: 2rem;
+    }
+    .born{
+        font-size: 1rem;
+    }
+    .live{
+        font-size: 0.5rem;
+    }
+  }

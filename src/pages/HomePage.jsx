@@ -33,7 +33,7 @@ function HomePage() {
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 1}
+      { threshold: 0.1}
     );
 
     if (compRef.current) {

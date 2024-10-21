@@ -161,12 +161,15 @@
 }
 
 @media (max-width: 576px) {
+  .text{
+    margin-top: 10vh;
+  }
   .text h1 {
-    font-size: 24px;
+    font-size: 16px;
   }
 
   .text p {
-    font-size: 12px;
+    font-size: 10px;
   }
 
   .circle-container {
@@ -176,7 +179,11 @@
 
   .skill,
   .social {
-    flex-direction: column;
+    flex-direction: row;
     align-items: center;
+  }
+  .skill img{
+    width: 20px;
+    height: 20px;
   }
 }
