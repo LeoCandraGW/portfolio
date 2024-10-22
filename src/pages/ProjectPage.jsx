@@ -4,7 +4,9 @@ function ProjectPage() {
   return (
     <section className="project" id="Project">
       <div className="project-page">
-        <h1>My Projects</h1>
+        <div className="card">
+          <h1>Under Maintnance</h1>
+        </div>
       </div>
     </section>
   );

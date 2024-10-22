@@ -47,7 +47,7 @@ function Navigation() {
 
   return (
     <div className="navigation">
-      <div className={`nav-links ${isOpen ? "show" : ""}`}>
+      <div className={`nav-links ${isOpen ? "show" : ""} borderXwidth`}>
         {NavLinks.map(({ path, label }) => (
           <a
             key={path}

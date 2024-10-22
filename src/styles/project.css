@@ -1,9 +1,20 @@
 .project-page{
-    background-color: #353b48;
+    background-color: #1e272e;
     height: 100vh;
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     padding: 20px;
 }
+
+.card, .card1{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 20vw;
+    height: 60vh;
+    background-color: #34495e;
+}
+

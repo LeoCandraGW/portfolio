@@ -15,15 +15,15 @@ function Header() {
           <Navigation />
         </header>
       </div>
-        <main>
-          <Routes>
-            <Route path="/" element={<HomePage/>} />
-            <Route path="#Home" element={<HomePage />} />
-            <Route path="#About" element={<AboutPage />} />
-            <Route path="#Experience" element={<ExperiencePage />} />
-            <Route path="#Project" element={<ProjectPage />} />
-          </Routes>
-        </main>
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="#Home" element={<HomePage />} />
+          <Route path="#About" element={<AboutPage />} />
+          <Route path="#Experience" element={<ExperiencePage />} />
+          <Route path="#Project" element={<ProjectPage />} />
+        </Routes>
+      </main>
     </>
   );
 }
