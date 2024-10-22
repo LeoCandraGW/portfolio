@@ -122,7 +122,7 @@
 .circle-container:hover {
   filter: drop-shadow(0px 0px 20px #5ddcff);
 }
-.circle-container:hover::before{
+.circle-container:hover::before {
   opacity: 0;
 }
 
@@ -227,14 +227,13 @@
     height: 50vw;
     width: 50vw;
   }
-
   .skill,
   .social {
     flex-direction: row;
     align-items: center;
   }
   .skill img {
-    width: 20px;
-    height: 20px;
+    width: 10px;
+    height: 10px;
   }
 }
