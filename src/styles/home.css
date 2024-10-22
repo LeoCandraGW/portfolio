@@ -77,10 +77,10 @@
 .circle-container::before {
   content: "";
   position: absolute;
-  top: -4px;
-  left: -4px;
-  height: 103%;
-  width: 103%;
+  top: -1%;
+  left: -1%;
+  height: 104%;
+  width: 102%;
   background-image: linear-gradient(135deg, #5ddcff, #3c67e3 43%, #4e00c2);
   border-radius: 50%;
   animation: spin 3s linear infinite;
@@ -90,10 +90,10 @@
 .circle-container::after {
   content: "";
   position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
+  top: 0%;
+  left: 0%;
   height: 100%;
+  width: 100%;
   background-image: linear-gradient(90deg, #4e00c2, #3c67e3 43%, #5ddcff);
   border-radius: 50%;
   animation: spin-reverse 2s linear infinite;
