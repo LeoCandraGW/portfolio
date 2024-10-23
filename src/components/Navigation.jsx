@@ -30,10 +30,8 @@ function Navigation() {
 
   const handleNavClick = (path) => {
     setActiveSection(path);
-    console.log("path" + path);
   };
 
-  console.log("active" + activeSection);
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };

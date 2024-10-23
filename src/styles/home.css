@@ -120,7 +120,7 @@
 }
 
 .circle-container:hover {
-  filter: drop-shadow(0px 0px 20px #5ddcff);
+  filter: drop-shadow(0px 0px 20px #3c67e3);
 }
 .circle-container:hover::before {
   opacity: 0;
