@@ -33,7 +33,7 @@ function HomePage() {
       ([entry]) => {
         setIsVisible(entry.isIntersecting);
       },
-      { threshold: 0.1}
+      { threshold: 0.1 }
     );
 
     if (compRef.current) {
@@ -92,8 +92,10 @@ function HomePage() {
                 width="40"
                 height="40"
                 ref={compRef}
-                initial={{ x: -90, opacity:0 }}
-                animate={isVisible ? { x: 0, opacity: 1 } : { x: -90, opacity: 0 }}
+                initial={{ x: -90, opacity: 0 }}
+                animate={
+                  isVisible ? { x: 0, opacity: 1 } : { x: -90, opacity: 0 }
+                }
                 transition={{
                   duration: 1.5,
                   type: "spring",
@@ -106,8 +108,10 @@ function HomePage() {
                 width="40"
                 height="40"
                 ref={compRef}
-                initial={{ x: -90, opacity:0 }}
-                animate={isVisible ? { x: 0, opacity: 1 } : { x: -90, opacity: 0 }}
+                initial={{ x: -90, opacity: 0 }}
+                animate={
+                  isVisible ? { x: 0, opacity: 1 } : { x: -90, opacity: 0 }
+                }
                 transition={{
                   duration: 1.5,
                   type: "spring",
@@ -121,8 +125,10 @@ function HomePage() {
                 width="40"
                 height="40"
                 ref={compRef}
-                initial={{ x: -90, opacity:0 }}
-                animate={isVisible ? { x: 0, opacity: 1 } : { x: -90, opacity: 0 }}
+                initial={{ x: -90, opacity: 0 }}
+                animate={
+                  isVisible ? { x: 0, opacity: 1 } : { x: -90, opacity: 0 }
+                }
                 transition={{
                   duration: 1.5,
                   type: "spring",
@@ -136,8 +142,10 @@ function HomePage() {
                 width="40"
                 height="40"
                 ref={compRef}
-                initial={{ x: -90, opacity:0 }}
-                animate={isVisible ? { x: 0, opacity: 1 } : { x: -90, opacity: 0 }}
+                initial={{ x: -90, opacity: 0 }}
+                animate={
+                  isVisible ? { x: 0, opacity: 1 } : { x: -90, opacity: 0 }
+                }
                 transition={{
                   duration: 1.5,
                   type: "spring",
@@ -151,8 +159,10 @@ function HomePage() {
                 width="40"
                 height="40"
                 ref={compRef}
-                initial={{ x: -90, opacity:0 }}
-                animate={isVisible ? { x: 0, opacity: 1 } : { x: -90, opacity: 0 }}
+                initial={{ x: -90, opacity: 0 }}
+                animate={
+                  isVisible ? { x: 0, opacity: 1 } : { x: -90, opacity: 0 }
+                }
                 transition={{
                   duration: 1.5,
                   type: "spring",
@@ -166,8 +176,10 @@ function HomePage() {
                 width="40"
                 height="40"
                 ref={compRef}
-                initial={{ x: 90, opacity:0 }}
-                animate={isVisible ? { x: 0, opacity: 1 } : { x: 90, opacity: 0 }}
+                initial={{ x: 90, opacity: 0 }}
+                animate={
+                  isVisible ? { x: 0, opacity: 1 } : { x: 90, opacity: 0 }
+                }
                 transition={{
                   duration: 1.5,
                   type: "spring",
@@ -181,8 +193,10 @@ function HomePage() {
                 width="40"
                 height="40"
                 ref={compRef}
-                initial={{ x: 90, opacity:0 }}
-                animate={isVisible ? { x: 0, opacity: 1 } : { x: 90, opacity: 0 }}
+                initial={{ x: 90, opacity: 0 }}
+                animate={
+                  isVisible ? { x: 0, opacity: 1 } : { x: 90, opacity: 0 }
+                }
                 transition={{
                   duration: 1.5,
                   type: "spring",
@@ -196,8 +210,10 @@ function HomePage() {
                 width="40"
                 height="40"
                 ref={compRef}
-                initial={{ x: 90, opacity:0 }}
-                animate={isVisible ? { x: 0, opacity: 1 } : { x: 90, opacity: 0 }}
+                initial={{ x: 90, opacity: 0 }}
+                animate={
+                  isVisible ? { x: 0, opacity: 1 } : { x: 90, opacity: 0 }
+                }
                 transition={{
                   duration: 1.5,
                   type: "spring",
@@ -211,8 +227,10 @@ function HomePage() {
                 width="40"
                 height="40"
                 ref={compRef}
-                initial={{ x: 90, opacity:0 }}
-                animate={isVisible ? { x: 0, opacity: 1 } : { x: 90, opacity: 0 }}
+                initial={{ x: 90, opacity: 0 }}
+                animate={
+                  isVisible ? { x: 0, opacity: 1 } : { x: 90, opacity: 0 }
+                }
                 transition={{
                   duration: 1.5,
                   type: "spring",
@@ -226,8 +244,10 @@ function HomePage() {
                 width="40"
                 height="40"
                 ref={compRef}
-                initial={{ x: 90, opacity:0 }}
-                animate={isVisible ? { x: 0, opacity: 1 } : { x: 90, opacity: 0 }}
+                initial={{ x: 90, opacity: 0 }}
+                animate={
+                  isVisible ? { x: 0, opacity: 1 } : { x: 90, opacity: 0 }
+                }
                 transition={{
                   duration: 1.5,
                   type: "spring",
@@ -274,7 +294,7 @@ function HomePage() {
           </div>
         </div>
       </section>
-      <AboutPage/>
+      <AboutPage />
       <SkillPage />
       <ProjectPage />
     </>

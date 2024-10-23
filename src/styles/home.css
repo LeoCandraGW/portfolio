@@ -120,7 +120,7 @@
 }
 
 .circle-container:hover {
-  filter: drop-shadow(0px 0px 20px #5ddcff);
+  filter: drop-shadow(0px 0px 20px #3c67e3);
 }
 .circle-container:hover::before {
   opacity: 0;
@@ -216,16 +216,17 @@
     margin-top: 10vh;
   }
   .text h1 {
-    font-size: 16px;
+    font-size: 18px;
   }
 
   .text p {
-    font-size: 10px;
+    font-size: 12px;
   }
 
   .circle-container {
-    height: 50vw;
-    width: 50vw;
+    margin-top: 5vh;
+    height: 60vw;
+    width: 60vw;
   }
   .skill,
   .social {
@@ -233,7 +234,7 @@
     align-items: center;
   }
   .skill img {
-    width: 10px;
-    height: 10px;
+    width: 15px;
+    height: 15px;
   }
 }
