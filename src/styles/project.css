@@ -70,7 +70,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.9);
   border-radius: 10px;
   z-index: 1;
   transition: background 0.3s;
@@ -80,14 +80,14 @@
 .card-mobile-note:hover::before,
 .card-note:hover::before,
 .card-forum:hover::before {
-  background: rgba(0, 0, 0, 0.9);
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .card-calculator img,
 .card-mobile-note img,
 .card-note img,
 .card-forum img {
-  opacity: 0;
+  opacity: 1;
   z-index: 1;
   transition: opacity 0.3s;
 }
@@ -96,7 +96,7 @@
 .card-mobile-note:hover img,
 .card-note:hover img,
 .card-forum:hover img {
-  opacity: 1;
+  opacity: 0;
 }
 
 .card-calculator:hover,
