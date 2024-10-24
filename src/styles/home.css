@@ -91,10 +91,10 @@
 .circle-container::after {
   content: "";
   position: absolute;
-  top: 0%;
-  left: 0%;
-  height: 100%;
-  width: 100%;
+  top: -1%;
+  left: -1%;
+  height: 104%;
+  width: 102%;
   background-image: linear-gradient(90deg, #4e00c2, #3c67e3 43%, #5ddcff);
   border-radius: 50%;
   animation: spin-reverse 2s linear infinite;
@@ -227,10 +227,13 @@
     height: 50vw;
     width: 50vw;
   }
-  .skill,
-  .social {
+  .skill{
     flex-direction: row;
     align-items: center;
+  }
+  .social{
+    left: 0px;
+    right: 0px;
   }
   .skill img {
     width: 10px;
