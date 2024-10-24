@@ -62,6 +62,7 @@ function HomePage() {
               transition={{
                 duration: 1.5,
                 type: "spring",
+                delay: 0.2,
               }}
             >
               Leo Candra Gunawan Wicaksono
@@ -75,6 +76,7 @@ function HomePage() {
               transition={{
                 duration: 1.5,
                 type: "spring",
+                delay: 0.2,
               }}
             >
               A junior front-end and mobile developer with a strong interest in
