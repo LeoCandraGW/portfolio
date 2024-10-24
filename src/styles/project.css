@@ -138,6 +138,7 @@
   }
   .card-note:hover,
   .card-forum:hover {
+    position: absolute;
     width: 35vh;
     height: 25vh;
   }
