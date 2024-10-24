@@ -1,6 +1,6 @@
 import React from "react";
 import "../styles/project.css";
-import { motion } from "framer-motion";
+import { motion, useTime, useTransform } from "framer-motion";
 function ProjectPage() {
   const [isVisible, setIsVisible] = React.useState(true);
   const compRef = React.useRef(null);
@@ -21,6 +21,9 @@ function ProjectPage() {
       observer.unobserve(compRef.current);
     };
   }, [compRef]);
+
+  const time = useTime();
+  const rotate = useTransform(time, [0, 3000], [0, 360], { clamp: false });
   return (
     <section className="project" id="Project">
       <div className="project-page">
@@ -107,21 +110,12 @@ function ProjectPage() {
           }}
         >
           <motion.img
+            style={{ rotate }}
             src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"
             title="React"
             alt="React"
             width="60"
             height="60"
-            animate={{
-              rotate: [0, 180, -180, 0],
-            }}
-            transition={{
-              duration: 2,
-              ease: "easeInOut",
-              times: [0, 0.3, 0.7, 1],
-              repeat: Infinity,
-              repeatDelay: 1,
-            }}
           />
         </motion.div>
         <motion.div
@@ -139,21 +133,12 @@ function ProjectPage() {
           }}
         >
           <motion.img
+            style={{ rotate }}
             src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"
             title="React"
             alt="React"
             width="60"
             height="60"
-            animate={{
-              rotate: [0, 180, -180, 0],
-            }}
-            transition={{
-              duration: 2,
-              ease: "easeInOut",
-              times: [0, 0.3, 0.7, 1],
-              repeat: Infinity,
-              repeatDelay: 1,
-            }}
           />
         </motion.div>
       </div>
