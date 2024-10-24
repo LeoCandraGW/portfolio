@@ -5,7 +5,7 @@ import AboutPage from "./AboutPage";
 import SkillPage from "./ExperiencePage";
 import ProjectPage from "./ProjectPage";
 import "../styles/home.css";
-import { motion } from "framer-motion";
+import { motion, useTime, useTransform } from "framer-motion";
 
 function HomePage() {
   const [isVisible, setIsVisible] = React.useState(true);
@@ -46,6 +46,9 @@ function HomePage() {
       }
     };
   }, [compRef]);
+
+  const time = useTime();
+  const rotate = useTransform(time, [0, 3000], [0, 360], { clamp: false });
 
   return (
     <>
@@ -104,7 +107,8 @@ function HomePage() {
                 }}
               />
               <motion.img
-                src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg"
+                style={{ rotate }}
+                src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"
                 title="React"
                 alt="React"
                 width="40"
@@ -138,6 +142,7 @@ function HomePage() {
                 }}
               />
               <motion.img
+                style={{ rotate }}
                 src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redux/redux-original.svg"
                 title="Redux"
                 alt="Redux"
