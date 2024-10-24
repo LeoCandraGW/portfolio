@@ -38,12 +38,24 @@ function ProjectPage() {
             type: "spring",
           }}
         >
-          <img
+          <motion.img
             src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg"
             title="Flutter"
             alt="Flutter"
             width="60"
             height="60"
+            animate={{
+              rotate: [90, 90, 0, 90],
+              y: [100, -100, 0, 100],
+              borderRadius: ["50%", "50%", "0%", "50%"],
+            }}
+            transition={{
+              duration: 2,
+              ease: "easeInOut",
+              times: [0, 0.2, 0.5, 0.8, 1],
+              repeat: Infinity,
+              repeatDelay: 1,
+            }}
           />
         </motion.div>
         <motion.div
@@ -60,12 +72,24 @@ function ProjectPage() {
             type: "spring",
           }}
         >
-          <img
+          <motion.img
             src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg"
             title="Flutter"
             alt="Flutter"
             width="60"
             height="60"
+            animate={{
+              rotate: [90, 90, 0, 90],
+              y: [100, -100, 0, 100],
+              borderRadius: ["50%", "50%", "0%", "50%"],
+            }}
+            transition={{
+              duration: 2,
+              ease: "easeInOut",
+              times: [0, 0.2, 0.5, 0.8, 1],
+              repeat: Infinity,
+              repeatDelay: 1,
+            }}
           />
         </motion.div>
         <motion.div
@@ -82,12 +106,22 @@ function ProjectPage() {
             type: "spring",
           }}
         >
-          <img
-            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg"
+          <motion.img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"
             title="React"
             alt="React"
             width="60"
             height="60"
+            animate={{
+              rotate: [0, 180, -180, 0],
+            }}
+            transition={{
+              duration: 2,
+              ease: "easeInOut",
+              times: [0, 0.3, 0.7, 1],
+              repeat: Infinity,
+              repeatDelay: 1,
+            }}
           />
         </motion.div>
         <motion.div
@@ -104,12 +138,22 @@ function ProjectPage() {
             type: "spring",
           }}
         >
-          <img
-            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original-wordmark.svg"
+          <motion.img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"
             title="React"
             alt="React"
             width="60"
             height="60"
+            animate={{
+              rotate: [0, 180, -180, 0],
+            }}
+            transition={{
+              duration: 2,
+              ease: "easeInOut",
+              times: [0, 0.3, 0.7, 1],
+              repeat: Infinity,
+              repeatDelay: 1,
+            }}
           />
         </motion.div>
       </div>
