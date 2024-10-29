@@ -1,0 +1,92 @@
+.pokemon-page {
+  background-color: #1e272e;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-evenly;
+  padding: 25px;
+}
+
+.pokemon-page h1,
+h2 {
+  color: #ecf0f1;
+}
+
+.pokemon-image {
+  display: flex;
+  flex-direction: row;
+  background-color: white;
+  width: 10vw;
+  height: 10vw;
+}
+.pokemon-image img {
+  width: 100%;
+  height: 100%;
+}
+
+.pokemon-page input,
+button {
+  font-size: 1.2rem;
+  margin: 10px;
+}
+
+.pokemon-page form {
+  width: 50%;
+  display: flex;
+  flex-direction: row;
+}
+
+.pokemon-page input {
+  flex: 2;
+  width: 100%;
+  padding: 10px 0;
+  font-size: 16px;
+  color: #dff9fb;
+  margin-bottom: 30px;
+  border: none;
+  border-bottom: 1px solid #dff9fb;
+  outline: none;
+  background: transparent;
+}
+
+.pokemon-page button {
+  flex: 1;
+  padding: 10px;
+  border-radius: 5%;
+  border: none;
+  transition: 0.5s;
+  background-color: #4834d4;
+  color: #dff9fb;
+  cursor: pointer;
+}
+.pokemon-page button:hover {
+  background-color: #81ecec;
+  color: #30336b;
+}
+
+.pokemon-page p {
+  font-size: 1.2rem;
+  color: #ecf0f1;
+}
+
+.hint {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+@media (max-width: 576px) {
+  .pokemon-page {
+    justify-content: center;
+  }
+  .pokemon-image {
+    width: 25vh;
+    height: 25vh;
+  }
+  .pokemon-page input,
+  button {
+    font-size: 12px;
+    margin: 10px;
+  }
+}

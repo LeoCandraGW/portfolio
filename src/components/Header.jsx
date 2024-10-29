@@ -6,6 +6,7 @@ import AboutPage from "../pages/AboutPage";
 import ExperiencePage from "../pages/ExperiencePage";
 import ProjectPage from "../pages/ProjectPage";
 import QuotePage from "../pages/QuotePage";
+import PokemonPage from "../pages/PokemonPage";
 import "../styles/header.css";
 function Header() {
   return (
@@ -24,6 +25,7 @@ function Header() {
           <Route path="#Experience" element={<ExperiencePage />} />
           <Route path="#Project" element={<ProjectPage />} />
           <Route path="#Quote" element={<QuotePage />} />
+          <Route path="#PokeApp" element={<PokemonPage />} />
         </Routes>
       </main>
     </>
