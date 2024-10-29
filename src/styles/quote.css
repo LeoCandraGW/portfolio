@@ -1,0 +1,43 @@
+/* Import Google Fonts */
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
+
+.container {
+  background-color: #1e272e;
+  height: 100vh;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.txt {
+  font-size: 32px;
+  display: inline-block;
+}
+
+.anim-text-flow {
+  display: inline-block;
+  animation-name: anim-text-flow-keys;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+  animation-fill-mode: forwards;
+}
+
+/* Keyframes for color animation */
+@keyframes anim-text-flow-keys {
+  0% {
+    color: #5ddcff;
+  }
+  50% {
+    color: #3498db;
+  }
+  100% {
+    color: #3c67e3;
+  }
+}
+
+@media (max-width: 576px) {
+  .txt { text-align: center;}
+}

@@ -41,6 +41,7 @@ function Navigation() {
     { path: "#About", label: "About" },
     { path: "#Experience", label: "Experience" },
     { path: "#Project", label: "Project" },
+    { path: "#Quote", label: "Quote" },
   ];
 
   return (

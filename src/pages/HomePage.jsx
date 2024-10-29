@@ -4,6 +4,7 @@ import Typewriter from "../components/TypeWriter";
 import AboutPage from "./AboutPage";
 import SkillPage from "./ExperiencePage";
 import ProjectPage from "./ProjectPage";
+import QuotePage from "./QuotePage";
 import "../styles/home.css";
 import { motion, useTime, useTransform } from "framer-motion";
 
@@ -304,6 +305,7 @@ function HomePage() {
       <AboutPage />
       <SkillPage />
       <ProjectPage />
+      <QuotePage />
     </>
   );
 }
