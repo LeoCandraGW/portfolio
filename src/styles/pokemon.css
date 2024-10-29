@@ -16,7 +16,7 @@ h2 {
 .pokemon-image {
   display: flex;
   flex-direction: row;
-  background-color: white;
+  /* background-color: #4834d4; */
   width: 10vw;
   height: 10vw;
 }

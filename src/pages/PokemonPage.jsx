@@ -47,7 +47,7 @@ function PokemonPage() {
   return (
     <section className="PokeApp" id="PokeApp">
       <div className="pokemon-page">
-        <h1>Guess the Pokémon!</h1>
+        <h1>What is that Pokémon!</h1>
         <h2>Score : {score}</h2>
         {pokemon && <Pokemon pokemon={pokemon} />}
         <div className="hint">

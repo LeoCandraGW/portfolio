@@ -7,7 +7,6 @@ const Pokemon = ({ pokemon }) => {
       <img
         src={pokemon.sprites.front_default}
         alt={pokemon.name}
-        style={{ filter: "brightness(0)" }}
       />
     </div>
   );
