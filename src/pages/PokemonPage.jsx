@@ -24,6 +24,8 @@ function PokemonPage() {
     setPokemon(responseJson);
     setMessage("");
     setGuess("");
+    setLength(2);
+    setPokename(responseJson.name.slice(0,1));
   };
 
   const handleGuessSubmit = (e) => {
