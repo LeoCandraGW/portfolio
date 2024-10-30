@@ -2,6 +2,7 @@ import React from "react";
 import Pokemon from "../components/Pokemon";
 import "../styles/pokemon.css";
 import { section } from "framer-motion/client";
+import { motion } from "framer-motion";
 
 function PokemonPage() {
   const [pokemon, setPokemon] = React.useState(null);
@@ -10,6 +11,7 @@ function PokemonPage() {
   const [score, setScore] = React.useState(0);
   const [length, setLength] = React.useState(1);
   const [pokename, setPokename] = React.useState("");
+  const ConstraintsRef = React.useRef(null);
 
   React.useEffect(() => {
     fetchRandomPokemon();
@@ -25,11 +27,15 @@ function PokemonPage() {
     setMessage("");
     setGuess("");
     setLength(2);
-    setPokename(responseJson.name.slice(0,1));
+    setPokename(responseJson.name.slice(0, 1));
   };
 
   const handleGuessSubmit = (e) => {
     e.preventDefault();
+    if (guess.length == 0) {
+      setMessage("Make some guess!");
+      return;
+    }
     if (guess.toLowerCase() === pokemon.name.toLowerCase()) {
       setScore(score + 1);
       setMessage(`Correct! It's ${pokemon.name}`);
@@ -48,10 +54,12 @@ function PokemonPage() {
 
   return (
     <section className="PokeApp" id="PokeApp">
-      <div className="pokemon-page">
+      <motion.div ref={ConstraintsRef} className="pokemon-page">
         <h1>What is that Pokémon!</h1>
         <h2>Score : {score}</h2>
-        {pokemon && <Pokemon pokemon={pokemon} />}
+        <motion.div drag dragConstraints={ConstraintsRef}>
+          {pokemon && <Pokemon pokemon={pokemon} />}
+        </motion.div>
         <div className="hint">
           <h1>{pokename}</h1>
           <button type="button" onClick={handleHintPress}>
@@ -64,12 +72,11 @@ function PokemonPage() {
             placeholder="Enter Pokémon name"
             value={guess}
             onChange={(e) => setGuess(e.target.value)}
-            required
           />
           <button type="submit">Submit Guess</button>
         </form>
         <p>{message}</p>
-      </div>
+      </motion.div>
     </section>
   );
 }

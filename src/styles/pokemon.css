@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: space-evenly;
   padding: 25px;
+  overflow: hidden;
 }
 
 .pokemon-page h1,
@@ -19,6 +20,7 @@ h2 {
   /* background-color: #4834d4; */
   width: 10vw;
   height: 10vw;
+  pointer-events: none;
 }
 .pokemon-image img {
   width: 100%;
