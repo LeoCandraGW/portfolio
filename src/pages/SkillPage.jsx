@@ -7,8 +7,8 @@ function SkillPage() {
   return (
     <section className="SkillPage" id="SkillPage">
       <div className="skill-page">
-        <ParallaxText baseVelocity={-5}>Framer Motion</ParallaxText>
-        <ParallaxText baseVelocity={5}>Scroll velocity</ParallaxText>
+        <ParallaxText baseVelocity={-5}>FrontEnd Developer</ParallaxText>
+        <ParallaxText baseVelocity={5}>FrontEnd Developer</ParallaxText>
       </div>
     </section>
   );
