@@ -29,6 +29,9 @@
 }
 
 @media (max-width: 576px) {
+    .about-page{
+        height: 80vh;
+    }
     .name{
         font-size: 2rem;
     }

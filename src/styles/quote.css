@@ -39,5 +39,8 @@
 }
 
 @media (max-width: 576px) {
+  .container {
+    height: 50vh;
+  }
   .txt { text-align: center;}
 }

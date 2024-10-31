@@ -23,3 +23,9 @@
   display: block;
   margin-right: 30px;
 }
+
+@media (max-width: 576px) {
+    .skill-page{
+        margin-top: 20vh;
+    }
+  }
