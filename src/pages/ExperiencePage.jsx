@@ -2,7 +2,7 @@ import React from "react";
 import "../styles/experience.css";
 import { motion } from "framer-motion";
 
-function SkillPage() {
+function ExperiencePage() {
   const [isVisible, setIsVisible] = React.useState(true);
   const compRef = React.useRef(null);
   React.useEffect(() => {
@@ -26,7 +26,7 @@ function SkillPage() {
   }, [compRef]);
   return (
     <section className="experience" id="Experience">
-      <div className="skill-page">
+      <div className="experience-page">
         <motion.div
           ref={compRef}
           className="card-diskominfo"
@@ -64,4 +64,4 @@ function SkillPage() {
   );
 }
 
-export default SkillPage;
+export default ExperiencePage;

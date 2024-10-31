@@ -1,8 +1,9 @@
 import React from "react";
 import me from "../assets/me.jpg";
 import Typewriter from "../components/TypeWriter";
+import SkillPage from "./SkillPage";
 import AboutPage from "./AboutPage";
-import SkillPage from "./ExperiencePage";
+import ExperiencePage from "./ExperiencePage";
 import ProjectPage from "./ProjectPage";
 import QuotePage from "./QuotePage";
 import PokemonPage from "./PokemonPage";
@@ -303,11 +304,12 @@ function HomePage() {
           </div>
         </div>
       </section>
-      <AboutPage />
       <SkillPage />
+      <AboutPage />
+      <ExperiencePage />
       <ProjectPage />
       <QuotePage />
-      <PokemonPage/>
+      <PokemonPage />
     </>
   );
 }

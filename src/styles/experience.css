@@ -1,4 +1,4 @@
-.skill-page {
+.experience-page {
   background-color: #1e272e;
   height: 100vh;
   display: flex;
@@ -83,7 +83,7 @@
 }
 
 @media (max-width: 576px) {
-  .skill-page {
+  .experience-page {
     flex-direction: column;
   }
   .card-diskominfo,
