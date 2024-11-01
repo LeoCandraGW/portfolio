@@ -8,8 +8,8 @@ export const getPokemon = async (name) => {
   return responseJson;
 };
 
-export const getPokemonList = async () => {
-  const response = await fetch(`${BASE_URL}/pokemon?limit=24`);
+export const getPokemonList = async (total) => {
+  const response = await fetch(`${BASE_URL}/pokemon?limit=${total}`);
   const responseJson = await response.json();
   return responseJson.results;
 };

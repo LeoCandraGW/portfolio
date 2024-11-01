@@ -1,48 +1,48 @@
 import React from "react";
 import { getPokemon, getPokemonList } from "./FetchPokemon";
 import Pokemon from "../components/Pokemon";
+import { IoIosAddCircleOutline } from "react-icons/io";
+import { WiDayCloudy } from "react-icons/wi";
 
 const SelectionScreen = ({ onSelect }) => {
-  const [pokemonList, setPokemonList] = React.useState([]);
   const [pokemon, setPokemon] = React.useState([]);
+  const [total, setTotal] = React.useState(10);
 
   React.useEffect(() => {
-    getPokemonList().then((data) => setPokemonList(data));
-  }, []);
+    const fetchPokemonListWithDetails = async () => {
+      try {
+        const pokemonList = await getPokemonList(total);
+        const pokemonDetails = await Promise.all(
+          pokemonList.map(async (poke) => {
+            const response = await fetch(poke.url);
+            if (!response.ok) {
+              throw new Error(
+                `Failed to fetch ${poke.name}: ${response.statusText}`
+              );
+            }
+            return await response.json();
+          })
+        );
+        setPokemon(pokemonDetails);
+      } catch (error) {
+        console.error("Error fetching Pokémon details:", error);
+      }
+    };
 
-  React.useEffect(() => {
-    if (pokemonList.length > 0) {
-      console.log("Fetching Pokémon details...");
-      const fetchPokemonDetails = async () => {
-        try {
-          const pokemonDetails = await Promise.all(
-            pokemonList.map(async (poke) => {
-              const response = await fetch(poke.url);
-              if (!response.ok) {
-                throw new Error(
-                  `Failed to fetch ${poke.name}: ${response.statusText}`
-                );
-              }
-              return await response.json();
-            })
-          );
-          setPokemon(pokemonDetails);
-        } catch (error) {
-          console.error("Error fetching Pokémon details:", error);
-        }
-      };
-
-      fetchPokemonDetails();
-    }
-  }, [pokemonList]);
+    fetchPokemonListWithDetails();
+  }, [total]);
 
   const handleSelect = async (pokemonName) => {
-    const pokemon = await getPokemon(pokemonName);
-    onSelect(pokemon);
+    const selectedPokemon = await getPokemon(pokemonName);
+    onSelect(selectedPokemon);
+  };
+
+  const handleMore = () => {
+    setTotal((prevTotal) => prevTotal + 5);
   };
 
   return (
-    <div  className="select-screen">
+    <div className="select-screen">
       <h2>Select Your Pokemon</h2>
       <div className="pokelist">
         {pokemon.map((poke) => (
@@ -53,6 +53,7 @@ const SelectionScreen = ({ onSelect }) => {
             </div>
           </button>
         ))}
+        <button onClick={handleMore} style={{width: "10vw", height:"5vh"}}><IoIosAddCircleOutline /></button>
       </div>
     </div>
   );
