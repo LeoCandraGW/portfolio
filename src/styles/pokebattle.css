@@ -1,0 +1,39 @@
+.pokebattle-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  padding: 10vw;
+}
+.battle-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.players {
+  display: flex;
+  flex-direction: row;
+}
+
+.players p {
+  margin: 20px;
+}
+
+.player-pokemon,
+.enemy-pokemon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.select-screen {
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

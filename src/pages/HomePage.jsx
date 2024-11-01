@@ -7,6 +7,7 @@ import ExperiencePage from "./ExperiencePage";
 import ProjectPage from "./ProjectPage";
 import QuotePage from "./QuotePage";
 import PokemonPage from "./PokemonPage";
+import BattlePokemonPage from "./BattlePokemonPage";
 import "../styles/home.css";
 import { motion, useTime, useTransform } from "framer-motion";
 
@@ -310,6 +311,7 @@ function HomePage() {
       <ProjectPage />
       <QuotePage />
       <PokemonPage />
+      <BattlePokemonPage />
     </>
   );
 }
