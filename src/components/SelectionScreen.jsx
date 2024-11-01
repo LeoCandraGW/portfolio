@@ -53,7 +53,9 @@ const SelectionScreen = ({ onSelect }) => {
             </div>
           </button>
         ))}
-        <button onClick={handleMore} style={{width: "10vw", height:"5vh"}}><IoIosAddCircleOutline /></button>
+        <button className="more" onClick={handleMore}>
+          <IoIosAddCircleOutline />
+        </button>
       </div>
     </div>
   );
