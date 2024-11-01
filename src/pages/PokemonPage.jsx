@@ -3,6 +3,7 @@ import Pokemon from "../components/Pokemon";
 import "../styles/pokemon.css";
 import { section } from "framer-motion/client";
 import { motion } from "framer-motion";
+import { FaHandPointDown } from "react-icons/fa";
 
 function PokemonPage() {
   const [pokemon, setPokemon] = React.useState(null);
@@ -76,6 +77,7 @@ function PokemonPage() {
           <button type="submit">Submit Guess</button>
         </form>
         <p>{message}</p>
+        <p><FaHandPointDown /> Scroll for battle simulator</p>
       </motion.div>
     </section>
   );
