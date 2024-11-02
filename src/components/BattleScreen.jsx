@@ -1,6 +1,7 @@
 import React from "react";
 import BattleLog from "./BattleLog";
 import Pokemon from "../components/Pokemon";
+import HpBar from "./HpBar";
 
 const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
   console.log("player pokemon" + playerPokemon);
@@ -8,11 +9,11 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
   const [playerHp, setPlayerHp] = React.useState(
     playerPokemon.stats[0].base_stat
   );
-  console.log(playerHp);
   const [opponentHp, setOpponentHp] = React.useState(
     opponentPokemon.stats[0].base_stat
   );
-  console.log(opponentHp);
+  const playerMaxHp = playerPokemon.stats[0].base_stat;
+  const opponentMaxHp = opponentPokemon.stats[0].base_stat;
   const [battleLog, setBattleLog] = React.useState([]);
   const [playerTurn, setPlayerTurn] = React.useState(true);
   const [message, setMessage] = React.useState("");
@@ -42,7 +43,7 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
       setMessage(
         `${playerPokemon.name} dealt ${damage} damage to Opponent's ${opponentPokemon.name}!`
       );
-      setCountdown(5);
+      setCountdown(3);
     } else {
       setMessage("");
       // Opponent's turn to attack
@@ -72,7 +73,7 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
       setMessage(
         `Special Attack ${playerPokemon.name} dealt ${damage} damage to Opponent's ${opponentPokemon.name}!`
       );
-      setCountdown(5);
+      setCountdown(3);
     } else {
       setMessage("");
       // Opponent's turn to attack
@@ -120,26 +121,36 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
     return () => clearInterval(time);
   }, [countdown]);
 
-
   return (
     <div className="battle-screen">
       <h2>Battle Screen</h2>
       <p>{countdown}</p>
       <div className="players">
-        <div className="player-pokemon">
-          <Pokemon pokemon={playerPokemon} />
-          <p>
-            Player's {playerPokemon.name}: {playerHp} HP
-          </p>
+        <div className="row-enemy">
+          <div className="empty"></div>
+          <div className="enemy-pokemon">
+            <img
+              src={opponentPokemon.sprites.front_default}
+              alt={opponentPokemon.name}
+            />
+            <HpBar currentHp={opponentHp} maxHp={opponentMaxHp} />
+          </div>
         </div>
-        <div className="enemy-pokemon">
-          <Pokemon pokemon={opponentPokemon} />
-          <p>
-            Opponent's {opponentPokemon.name}: {opponentHp} HP
-          </p>
+        <div className="row-player">
+          <div className="player-pokemon">
+            <img
+              src={playerPokemon.sprites.back_default}
+              alt={playerPokemon.name}
+            />
+            <HpBar currentHp={playerHp} maxHp={playerMaxHp} />
+          </div>
+          <div className="empty"></div>
         </div>
       </div>
-      <button onClick={attack} disabled={playerHp === 0 || opponentHp === 0 || !playerTurn}>
+      <button
+        onClick={attack}
+        disabled={playerHp === 0 || opponentHp === 0 || !playerTurn}
+      >
         {playerTurn ? `Attack with ${playerPokemon.name}` : "Opponent's Turn"}
       </button>
       <button
