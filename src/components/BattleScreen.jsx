@@ -1,11 +1,9 @@
 import React from "react";
-import BattleLog from "./BattleLog";
 import Pokemon from "../components/Pokemon";
 import HpBar from "./HpBar";
+import { motion } from "framer-motion";
 
 const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
-  console.log("player pokemon" + playerPokemon);
-  console.log("opponent pokemon" + opponentPokemon);
   const [playerHp, setPlayerHp] = React.useState(
     playerPokemon.stats[0].base_stat
   );
@@ -14,7 +12,6 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
   );
   const playerMaxHp = playerPokemon.stats[0].base_stat;
   const opponentMaxHp = opponentPokemon.stats[0].base_stat;
-  const [battleLog, setBattleLog] = React.useState([]);
   const [playerTurn, setPlayerTurn] = React.useState(true);
   const [message, setMessage] = React.useState("");
   const [countdown, setCountdown] = React.useState(0);
@@ -36,10 +33,6 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
       // Player's turn to attack
       const damage = calculateDamage(playerPokemon, opponentPokemon);
       setOpponentHp((hp) => Math.max(0, hp - damage));
-      setBattleLog((log) => [
-        ...log,
-        `${playerPokemon.name} dealt ${damage} damage to Opponent's ${opponentPokemon.name}!`,
-      ]);
       setMessage(
         `${playerPokemon.name} dealt ${damage} damage to Opponent's ${opponentPokemon.name}!`
       );
@@ -49,10 +42,6 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
       // Opponent's turn to attack
       const damage = calculateDamage(opponentPokemon, playerPokemon);
       setPlayerHp((hp) => Math.max(0, hp - damage));
-      setBattleLog((log) => [
-        ...log,
-        `${opponentPokemon.name} dealt ${damage} damage to Player's ${playerPokemon.name}!`,
-      ]);
       setMessage(
         `${opponentPokemon.name} dealt ${damage} damage to Opponent's ${playerPokemon.name}!`
       );
@@ -66,10 +55,6 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
       // Player's turn to attack
       const damage = calculatespecialDamage(playerPokemon, opponentPokemon);
       setOpponentHp((hp) => Math.max(0, hp - damage));
-      setBattleLog((log) => [
-        ...log,
-        `Special Attack ${playerPokemon.name} dealt ${damage} damage to Opponent's ${opponentPokemon.name}!`,
-      ]);
       setMessage(
         `Special Attack ${playerPokemon.name} dealt ${damage} damage to Opponent's ${opponentPokemon.name}!`
       );
@@ -79,10 +64,6 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
       // Opponent's turn to attack
       const damage = calculateDamage(opponentPokemon, playerPokemon);
       setPlayerHp((hp) => Math.max(0, hp - damage));
-      setBattleLog((log) => [
-        ...log,
-        `Special Attack ${opponentPokemon.name} dealt ${damage} damage to Player's ${playerPokemon.name}!`,
-      ]);
       setMessage(
         `Special Attack ${opponentPokemon.name} dealt ${damage} damage to Opponent's ${playerPokemon.name}!`
       );
@@ -92,10 +73,13 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
 
   React.useEffect(() => {
     if (playerHp === 0 || opponentHp === 0) {
-      const winner = playerHp === 0 ? opponentPokemon.name : playerPokemon.name;
-      setBattleLog(() => [...log, `Battle ended! ${winner} wins`]);
-      const batMessage = `Battle ended! ${winner} wins`;
-      onBattleEnd(batMessage);
+      const winner = playerHp === 0 ? opponentPokemon: playerPokemon;
+      const batMessage = `Battle ended! ${winner.name} wins`;
+      const timer = setTimeout(() => {
+        onBattleEnd(batMessage, winner);
+      }, 3000);
+
+      return () => clearTimeout(timer);
     }
   }, [
     playerHp,
@@ -126,7 +110,14 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
       <h2>Battle Screen</h2>
       <p>{countdown}</p>
       <div className="players">
-        <div className="row-enemy">
+        <motion.div
+          className="row-enemy"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 2,
+          }}
+        >
           <div className="empty"></div>
           <div className="enemy-pokemon">
             <img
@@ -135,8 +126,16 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
             />
             <HpBar currentHp={opponentHp} maxHp={opponentMaxHp} />
           </div>
-        </div>
-        <div className="row-player">
+        </motion.div>
+        <motion.div
+          className="row-player"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{
+            duration: 2,
+            delay: 1,
+          }}
+        >
           <div className="player-pokemon">
             <img
               src={playerPokemon.sprites.back_default}
@@ -145,24 +144,23 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
             <HpBar currentHp={playerHp} maxHp={playerMaxHp} />
           </div>
           <div className="empty"></div>
-        </div>
+        </motion.div>
       </div>
-      <button
-        onClick={attack}
-        disabled={playerHp === 0 || opponentHp === 0 || !playerTurn}
-      >
-        {playerTurn ? `Attack with ${playerPokemon.name}` : "Opponent's Turn"}
-      </button>
-      <button
-        onClick={specialAttack}
-        disabled={playerHp === 0 || opponentHp === 0 || !playerTurn}
-      >
-        {playerTurn
-          ? `Sp Attack with ${playerPokemon.name}`
-          : "Opponent's Turn"}
-      </button>
+      <div className="att-button">
+        <button
+          onClick={attack}
+          disabled={playerHp === 0 || opponentHp === 0 || !playerTurn}
+        >
+          {playerTurn ? `Normal Attack` : "Opponent's Turn"}
+        </button>
+        <button
+          onClick={specialAttack}
+          disabled={playerHp === 0 || opponentHp === 0 || !playerTurn}
+        >
+          {playerTurn ? `Sp Attack` : "Opponent's Turn"}
+        </button>
+      </div>
       <p>{message}</p>
-      <BattleLog log={battleLog} />
     </div>
   );
 };

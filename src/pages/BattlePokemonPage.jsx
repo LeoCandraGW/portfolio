@@ -9,6 +9,7 @@ function BattlePokemonPage() {
   const [opponentPokemon, setOpponentPokemon] = React.useState(null);
   const [battleEnded, setBattleEnded] = React.useState(false);
   const [battleMessage, setBattleMessage] = React.useState("");
+  const [winnerPokemon, setWinnerPokemon] = React.useState(null);
 
   React.useEffect(() => {
     fetchRandomPokemon();
@@ -23,9 +24,10 @@ function BattlePokemonPage() {
     setOpponentPokemon(responseJson);
   };
 
-  const handleBattleFieldEnd = (batMessage) => {
+  const handleBattleFieldEnd = (batMessage, winner) => {
     setBattleEnded(true);
     setBattleMessage(batMessage);
+    setWinnerPokemon(winner);
   };
 
   const resetBattle = () => {
@@ -52,8 +54,12 @@ function BattlePokemonPage() {
           )
         ) : (
           <>
+             <img
+              src={winnerPokemon.sprites.front_default}
+              alt={winnerPokemon.name}
+            />
             <p>{battleMessage}</p>
-            <button onClick={resetBattle} className="play-again-button">
+            <button onClick={resetBattle} className="play-again">
               Play Again
             </button>
           </>

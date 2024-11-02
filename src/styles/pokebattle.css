@@ -24,18 +24,19 @@
 
 .players {
   display: flex;
-  flex-direction: column
+  flex-direction: column;
 }
 
 .players p {
   margin: 20px;
 }
 
-.players img{
+.players img {
   width: 9vw;
   height: 9vw;
 }
-.row-enemy, .row-player {
+.row-enemy,
+.row-player {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -65,6 +66,24 @@
 .pokelist {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
+}
+
+.att-button {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.att-button button,
+.play-again {
+  width: 6vw;
+  height: 6vw;
+  background-color: #bdc3c7;
+  cursor: pointer;
+}
+
+.att-button button:hover,
+.play-again:hover {
+  background-color: #95a5a6;
 }
 
 .pokelist button {
@@ -140,8 +159,13 @@
     height: 10vh;
   }
 
-  .players img{
+  .players img {
     width: 10vh;
     height: 10vh;
+  }
+
+  .att-button button {
+    width: 6vh;
+    height: 6vh;
   }
 }
