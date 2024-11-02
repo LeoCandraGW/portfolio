@@ -1,5 +1,4 @@
 .project-page {
-  background-color: #1e272e;
   height: 100vh;
   display: grid;
   grid-template-columns: repeat(2, 1fr);

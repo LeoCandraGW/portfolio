@@ -312,6 +312,40 @@ function HomePage() {
       <QuotePage />
       <PokemonPage />
       <BattlePokemonPage />
+      <footer>
+        <h1>Made With</h1>
+        <div className="tech-stack">
+          <motion.img
+            style={{ rotate }}
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"
+            title="React"
+            alt="React"
+            width="40"
+            height="40"
+          />
+          <motion.img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/framermotion/framermotion-original.svg"
+            title="React"
+            alt="React"
+            width="40"
+            height="40"
+          />
+          <motion.img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-plain-wordmark.svg"
+            title="CSS3"
+            alt="CSS"
+            width="40"
+            height="40"
+          />
+          <motion.img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg"
+            title="JavaScript"
+            alt="JavaScript"
+            width="40"
+            height="40"
+          />
+        </div>
+      </footer>
     </>
   );
 }

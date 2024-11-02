@@ -26,8 +26,10 @@ function ProjectPage() {
   const rotate = useTransform(time, [0, 3000], [0, 360], { clamp: false });
   return (
     <section className="project" id="Project">
-      <div className="project-page">
+      <motion.div ref={compRef} className="project-page">
         <motion.div
+          drag
+          dragConstraints={compRef}
           ref={compRef}
           className="card-calculator"
           initial={{ scale: 0, opacity: 0, rotate: 180 }}
@@ -62,6 +64,8 @@ function ProjectPage() {
           />
         </motion.div>
         <motion.div
+          drag
+          dragConstraints={compRef}
           ref={compRef}
           className="card-mobile-note"
           initial={{ scale: 0, opacity: 0, rotate: 180 }}
@@ -96,6 +100,8 @@ function ProjectPage() {
           />
         </motion.div>
         <motion.div
+          drag
+          dragConstraints={compRef}
           ref={compRef}
           className="card-note"
           initial={{ scale: 0, opacity: 0, rotate: 180 }}
@@ -119,6 +125,8 @@ function ProjectPage() {
           />
         </motion.div>
         <motion.div
+          drag
+          dragConstraints={compRef}
           ref={compRef}
           className="card-forum"
           initial={{ scale: 0, opacity: 0, rotate: 180 }}
@@ -141,7 +149,7 @@ function ProjectPage() {
             height="60"
           />
         </motion.div>
-      </div>
+      </motion.div>
     </section>
   );
 }
