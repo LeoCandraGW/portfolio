@@ -164,7 +164,7 @@
     height: 10vh;
   }
 
-  .att-button button {
+  .att-button button, .play-again {
     width: 6vh;
     height: 6vh;
   }
