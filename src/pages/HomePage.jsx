@@ -303,9 +303,30 @@ function HomePage() {
                 />
               </a>
             </div>
+
+            <div className="hover-instruction">
+              <h2>Instruction</h2>
+              <div className="instruction">
+                <p>Click On Number : </p>
+                <p>1 : mercury</p>
+                <p>2 : venus</p>
+                <p>3 : earth</p>
+                <p>4 : mars</p>
+                <p>5 : jupiter</p>
+                <p>6 : saturn</p>
+                <p>7 : uranus</p>
+                <p>8 : neptune</p>
+                <p>click again to exit</p>
+                <p>- [fly controls] -</p>
+                <p><b>WASD</b> move, <b>R|F</b> up | down,</p>
+                <p><b>Q|E</b> roll, <b>up|down</b> pitch,</p>
+                <p> <b>left|right</b> yaw</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
+
       <SkillPage />
       <AboutPage />
       <ExperiencePage />

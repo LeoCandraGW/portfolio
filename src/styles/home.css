@@ -64,6 +64,35 @@
   z-index: 10;
 }
 
+.instruction {
+  position: fixed;
+  bottom: 40px;
+  left: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  color: white;
+  transition: 0.5s;
+  z-index: 10;
+  transform: translateY(350px);
+}
+.hover-instruction {
+  position: fixed;
+  bottom: 10px;
+  left: 10px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  color: white;
+  transition: 0.5s;
+  z-index: 10;
+}
+.hover-instruction:hover .instruction {
+  transform: translateY(-10px);
+}
+
 .circle-container {
   position: relative;
   height: 20vw;
@@ -122,7 +151,8 @@
 .circle-container:hover {
   filter: drop-shadow(0px 0px 20px #3c67e3);
 }
-.circle-container:hover::before, .circle-container:hover::after{
+.circle-container:hover::before,
+.circle-container:hover::after {
   opacity: 0;
 }
 
@@ -227,13 +257,16 @@
     height: 50vw;
     width: 50vw;
   }
-  .skill{
+  .skill {
     flex-direction: row;
     align-items: center;
   }
   .social{
     left: 0px;
     right: 0px;
+  }
+  .hover-instruction, .instruction{
+    visibility: hidden;
   }
   .skill img {
     width: 10px;
