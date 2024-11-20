@@ -10,8 +10,8 @@
 }
 .card-diskominfo,
 .card-sritex {
-  width: 40vw;
-  height: 60vh;
+  width: 20vw;
+  height: 30vh;
   background-size: cover;
   background-position: center;
   border-radius: 5%;
@@ -31,6 +31,12 @@
   border-radius: 5%;
   z-index: 1;
   transition: 0.5s;
+}
+
+.card-diskominfo:hover,
+.card-sritex:hover {
+  width: 40vw;
+  height: 60vh;
 }
 
 .card-diskominfo:hover::before,
@@ -88,6 +94,12 @@
   }
   .card-diskominfo,
   .card-sritex {
+    width: 35vw;
+    height: 15vh;
+  }
+
+  .card-diskominfo:hover,
+  .card-sritex:hover {
     width: 70vw;
     height: 30vh;
   }
