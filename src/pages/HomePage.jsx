@@ -316,7 +316,7 @@ function HomePage() {
                 <p>6 : saturn</p>
                 <p>7 : uranus</p>
                 <p>8 : neptune</p>
-                <p>click again to exit</p>
+                <p>click again to exit following planet</p>
                 <p>- [fly controls] -</p>
                 <p><b>WASD</b> move, <b>R|F</b> up | down,</p>
                 <p><b>Q|E</b> roll, <b>up|down</b> pitch,</p>

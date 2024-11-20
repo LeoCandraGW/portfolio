@@ -92,6 +92,13 @@
 .hover-instruction:hover .instruction {
   transform: translateY(-10px);
 }
+h2{
+  transition: 0.5s;
+}
+
+.hover-instruction:hover h2{
+  color: #3498db;
+}
 
 .circle-container {
   position: relative;
