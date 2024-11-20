@@ -2,7 +2,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap");
 
 .container {
-  background-color: #1e272e;
+  background-color: transparent;
   height: 100vh;
   display: flex;
   flex-direction: row;

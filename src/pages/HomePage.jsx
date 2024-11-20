@@ -8,6 +8,7 @@ import ProjectPage from "./ProjectPage";
 import QuotePage from "./QuotePage";
 import PokemonPage from "./PokemonPage";
 import BattlePokemonPage from "./BattlePokemonPage";
+import ThreeScene from "./ThreejsPage";
 import "../styles/home.css";
 import { motion, useTime, useTransform } from "framer-motion";
 
@@ -312,6 +313,7 @@ function HomePage() {
       <QuotePage />
       <PokemonPage />
       <BattlePokemonPage />
+      <ThreeScene />
       <footer>
         <h1>Made With</h1>
         <div className="tech-stack">
