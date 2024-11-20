@@ -326,7 +326,17 @@ function HomePage() {
             height="40"
           />
           <motion.img
-            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/framermotion/framermotion-original.svg"
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/threejs/threejs-original-wordmark.svg"
+            title="React"
+            alt="React"
+            width="40"
+            height="40"
+            style={{
+              filter: "invert(100%)",
+            }}
+          />
+          <motion.img
+            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/framermotion/framermotion-original-wordmark.svg"
             title="React"
             alt="React"
             width="40"
