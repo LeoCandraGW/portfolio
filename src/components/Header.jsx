@@ -7,13 +7,15 @@ import ExperiencePage from "../pages/ExperiencePage";
 import ProjectPage from "../pages/ProjectPage";
 import QuotePage from "../pages/QuotePage";
 import PokemonPage from "../pages/PokemonPage";
+import ThreeLogo from "../pages/ThreeLogo";
 import "../styles/header.css";
 function Header() {
   return (
     <>
       <div className="header-item">
         <header>
-          <h2 className="logo">Leo Candra</h2>
+          {/* <h2 className="logo">Leo Candra</h2> */}
+          <ThreeLogo />
           <Navigation />
         </header>
       </div>

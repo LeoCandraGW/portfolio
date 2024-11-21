@@ -15,6 +15,10 @@ header {
   overflow: hidden;
 }
 
+.logo1{
+  background-color: transparent;
+}
+
 .logo {
   font-size: 16px;
   font-weight: bold;
