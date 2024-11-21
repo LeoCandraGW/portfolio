@@ -25,7 +25,7 @@ function ThreeLogo() {
     renderer.setPixelRatio(window.devicePixelRatio);
     renderer.setSize(200, 100);
 
-    camera.position.x = 10;
+    camera.position.x = 30;
     camera.position.z = 250;
     camera.lookAt(-35, 0, 0);
 
@@ -55,8 +55,8 @@ function ThreeLogo() {
       }
     );
 
-    const pointLight = new THREE.PointLight(0xffffff, 100000, 100000);
-    pointLight.position.set(100, 150, 100);
+    const pointLight = new THREE.PointLight(0xffffff, 1000000, 100000);
+    pointLight.position.set(100, 150, 150);
     scene.add(pointLight);
 
     const ambientLight = new THREE.AmbientLight(0x404040, 2);
