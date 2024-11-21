@@ -63,7 +63,7 @@ function ThreeScene() {
     const sun = new THREE.Mesh(sunGeo, sunMat);
     scene.add(sun);
 
-    const sunLight = new THREE.PointLight(0xffffff, 5, 1000);
+    const sunLight = new THREE.PointLight(0xffffff, 100000, 100000);
     sunLight.position.set(0, 0, 0);
     scene.add(sunLight);
 
