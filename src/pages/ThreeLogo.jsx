@@ -6,6 +6,7 @@ import { FontLoader } from "three/examples/jsm/loaders/FontLoader.js";
 import { TextGeometry } from "three/examples/jsm/Addons.js";
 import { GLTFLoader } from "three/examples/jsm/Addons.js";
 
+import TeslaS from "../assets/tesla_model_s.glb";
 
 function ThreeLogo() {
   React.useEffect(() => {
@@ -18,7 +19,7 @@ function ThreeLogo() {
       1000
     );
 
-    const renderer = new THREE.WebGLRenderer({alpha:true});
+    const renderer = new THREE.WebGLRenderer({ alpha: true });
     const container = document.getElementById("logo-container");
     container.appendChild(renderer.domElement);
 
@@ -79,7 +80,7 @@ function ThreeLogo() {
     const loader1 = new GLTFLoader();
 
     loader1.load(
-      "/public/assets/tesla_model_s.glb",
+      TeslaS,
       function (gltf) {
         gltf.scene.position.set(-350, -40, 70);
         gltf.scene.rotation.y = 6;
