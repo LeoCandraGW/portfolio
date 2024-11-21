@@ -10,12 +10,29 @@ import PokemonPage from "../pages/PokemonPage";
 import ThreeLogo from "../pages/ThreeLogo";
 import "../styles/header.css";
 function Header() {
+  const [isMobile, setIsMobile] = React.useState(false);
+
+  React.useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 800) {
+        setIsMobile(true);
+      }
+      else{
+        setIsMobile(false)
+      }
+    };
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <>
       <div className="header-item">
         <header>
-          {/* <h2 className="logo">Leo Candra</h2> */}
-          <ThreeLogo />
+          {isMobile ? <h2 className="logo">Leo Candra</h2> : <ThreeLogo />}
           <Navigation />
         </header>
       </div>
