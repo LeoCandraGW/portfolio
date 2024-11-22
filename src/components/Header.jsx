@@ -13,12 +13,14 @@ function Header() {
   const [isMobile, setIsMobile] = React.useState(false);
 
   React.useEffect(() => {
+    if (window.innerWidth < 800) {
+      setIsMobile(true);
+    }
     const handleResize = () => {
       if (window.innerWidth < 800) {
         setIsMobile(true);
-      }
-      else{
-        setIsMobile(false)
+      } else {
+        setIsMobile(false);
       }
     };
     window.addEventListener("resize", handleResize);
