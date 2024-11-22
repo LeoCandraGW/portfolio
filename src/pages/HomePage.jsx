@@ -55,26 +55,32 @@ function HomePage() {
   const time = useTime();
   const rotate = useTransform(time, [0, 3000], [0, 360], { clamp: false });
 
+  React.useEffect(() => {
+    const hoverInstruction = document.querySelector(".hover-instruction");
+    const text = document.querySelector(".text");
+
+    const handleMouseEnter = () => {
+      text.style.transform = "translateX(6vw)";
+    };
+
+    const handleMouseLeave = () => {
+      text.style.transform = "";
+    };
+
+    hoverInstruction?.addEventListener("mouseenter", handleMouseEnter);
+    hoverInstruction?.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      hoverInstruction?.removeEventListener("mouseenter", handleMouseEnter);
+      hoverInstruction?.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
   return (
     <>
       <section className="home" id="Home">
         <div className="home-page">
           <div className="text">
-            <motion.p
-              ref={compRef}
-              initial={{ x: -90, opacity: 0 }}
-              animate={
-                isVisible ? { x: 0, opacity: 1 } : { x: -90, opacity: 0 }
-              }
-              exit={{ x: -90, opacity: 0 }}
-              transition={{
-                duration: 1.5,
-                type: "spring",
-                delay: 0.2,
-              }}
-            >
-              Leo Candra Gunawan Wicaksono
-            </motion.p>
             <h1>
               <Typewriter text="Front-End Developer" delay={100} />
             </h1>
@@ -318,9 +324,16 @@ function HomePage() {
                 <p>8 : neptune</p>
                 <p>click again to exit following planet</p>
                 <p>- [fly controls] -</p>
-                <p><b>WASD</b> move, <b>R|F</b> up | down,</p>
-                <p><b>Q|E</b> roll, <b>up|down</b> pitch,</p>
-                <p> <b>left|right</b> yaw</p>
+                <p>
+                  <b>WASD</b> move, <b>R|F</b> up | down,
+                </p>
+                <p>
+                  <b>Q|E</b> roll, <b>up|down</b> pitch,
+                </p>
+                <p>
+                  {" "}
+                  <b>left|right</b> yaw
+                </p>
               </div>
             </div>
           </div>

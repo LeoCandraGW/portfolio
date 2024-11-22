@@ -4,7 +4,8 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
+  background-color: rgba(0, 0, 0, 0.5);
   padding: 20px;
 }
 
@@ -18,6 +19,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  transition: transform 0.5s;
 }
 
 .text h1 {
@@ -26,7 +28,7 @@
 }
 
 .text p {
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .skill {
@@ -92,11 +94,12 @@
 .hover-instruction:hover .instruction {
   transform: translateY(-10px);
 }
-h2{
+
+h2 {
   transition: 0.5s;
 }
 
-.hover-instruction:hover h2{
+.hover-instruction:hover h2 {
   color: #3498db;
 }
 
@@ -227,6 +230,11 @@ h2{
     width: 40vw;
   }
 
+  .hover-instruction,
+  .instruction {
+    visibility: hidden;
+  }
+
   .skill,
   .social {
     justify-content: center;
@@ -268,12 +276,9 @@ h2{
     flex-direction: row;
     align-items: center;
   }
-  .social{
+  .social {
     left: 0px;
     right: 0px;
-  }
-  .hover-instruction, .instruction{
-    visibility: hidden;
   }
   .skill img {
     width: 10px;

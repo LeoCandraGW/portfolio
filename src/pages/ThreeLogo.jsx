@@ -37,7 +37,7 @@ function ThreeLogo() {
         const textGeo = new TextGeometry("Leo Candra", {
           font: font,
           size: 80,
-          height: 10,
+          depth: 10,
           curveSegments: 12,
           bevelEnabled: true,
           bevelThickness: 2,
@@ -104,6 +104,7 @@ function ThreeLogo() {
     animate();
 
     return () => {
+      renderer.dispose();
       container.removeChild(renderer.domElement);
     };
   }, []);
