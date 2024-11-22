@@ -76,7 +76,6 @@ function ThreeLogo() {
     let speed = 1;
     let distance = 500;
 
-    console.log(elapsedTime);
     const loader1 = new GLTFLoader();
 
     loader1.load(

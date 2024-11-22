@@ -35,12 +35,25 @@ function ThreeScene() {
     );
 
     const renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
     const container = document.getElementById("three-container");
     container.appendChild(renderer.domElement);
 
     renderer.setPixelRatio(window.devicePixelRatio);
-    renderer.setSize(window.innerWidth, window.innerHeight);
+
+    let widthSize = window.innerWidth;
+    let heightSize = window.innerHeight;
+
+    renderer.setSize(widthSize, heightSize);
+    
+    const handleResize = () => {
+      widthSize = window.innerWidth;
+      heightSize = window.innerHeight;
+
+      renderer.setSize(widthSize, heightSize);
+      camera.aspect = widthSize / heightSize;
+      camera.updateProjectionMatrix();
+    };
+    window.addEventListener("resize", handleResize);
 
     camera.position.setY(200);
     camera.rotation.x = -Math.PI / 2;
@@ -274,6 +287,7 @@ function ThreeScene() {
 
     return () => {
       container.removeChild(renderer.domElement);
+      window.removeEventListener("resize", handleResize);
     };
   }, []);
 
