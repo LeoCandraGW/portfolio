@@ -1,147 +1,87 @@
-.project-page {
+.project {
   height: 100vh;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-  gap: 20px;
-  justify-items: center;
+  display: flex;
+  flex-direction: row;
   align-items: center;
-  padding: 20px;
-  overflow: hidden;
 }
 
-.card-calculator,
-.card-mobile-note,
-.card-note,
-.card-forum,
-.card-free {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  border-radius: 10px;
-  overflow: hidden;
-  transition: transform 0.3s, box-shadow 0.3s;
-  width: 15vw;
-  height: 15vw;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+.wrapper {
+  margin: 10px;
+  width: 25vw;
+  height: 70vh;
   transition: 0.5s;
 }
 
-.card-calculator {
-  background: url("../assets/projects/calculator.JPG") no-repeat center center;
-  background-size: cover;
+.wrapper:hover img{
+  opacity: 100% !important;
 }
 
-.card-mobile-note {
-  background: url("../assets/projects/mobile-note.JPG") no-repeat center center;
-  background-size: cover;
+.article{
+  padding: 10px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  display: none;
 }
 
-.card-note {
-  background: url("../assets/projects/note.JPG") no-repeat center center;
-  background-size: cover;
+.child {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
 }
 
-.card-forum {
-  background: url("../assets/projects/forum.JPG") no-repeat center center;
-  background-size: cover;
-}
-.card-calculator:hover,
-.card-mobile-note:hover {
-  width: 15vw;
-  height: 65vh;
-}
-.card-note:hover,
-.card-forum:hover {
-  width: 40vw;
-  height: 40vh;
-}
-
-.card-calculator::before,
-.card-mobile-note::before,
-.card-note::before,
-.card-forum::before {
-  content: "";
-  position: absolute;
+.child img {
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.9);
+  object-fit: cover;
+  opacity: 50%;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.show.calc {
+  width: 25vw;
+  height: 80vh;
+  transform: translateX(300px);
+}
+
+.article.show{
+  display: block;
+}
+
+.show.mnote {
+  width: 25vw;
+  height: 80vh;
+  transform: translateX(300px);
+}
+.show.not {
+  width: 60vw;
+  height: 50vh;
+  transform: translateX(300px);
+}
+.show.foru {
+  width: 60vw;
+  height: 50vh;
+  transform: translateX(300px);
+}
+
+.show {
+  display: block !important;
+}
+.show img {
+  opacity: 100%;
+  object-fit: fill;
+  cursor:default;
+}
+.notShow {
+  display: none;
+}
+
+.closebt button{
+  padding: 10px;
+  border: none;
   border-radius: 10px;
-  z-index: 1;
-  transition: background 0.3s;
-}
-
-.card-calculator:hover::before,
-.card-mobile-note:hover::before,
-.card-note:hover::before,
-.card-forum:hover::before {
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.card-calculator img,
-.card-mobile-note img,
-.card-note img,
-.card-forum img {
-  opacity: 1;
-  z-index: 1;
-  transition: opacity 0.3s;
-}
-
-.card-calculator:hover img,
-.card-mobile-note:hover img,
-.card-note:hover img,
-.card-forum:hover img {
-  opacity: 0;
-}
-
-.card-calculator:hover,
-.card-mobile-note:hover,
-.card-note:hover,
-.card-forum:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-}
-
-@media (max-width: 768px) {
-  .project-page {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .card-calculator,
-  .card-mobile-note,
-  .card-note,
-  .card-forum {
-    width: 90%;
-    height: auto;
-    max-width: 90%;
-  }
-}
-
-@media (max-width: 576px) {
-  .project-page {
-    grid-template-columns: repeat(2, 1fr);
-    grid-template-rows: repeat(2, 1fr);
-  }
-
-  .card-calculator,
-  .card-mobile-note,
-  .card-note,
-  .card-forum {
-    height: 20vh;
-    width: 20vh;
-  }
-  .card-calculator:hover,
-  .card-mobile-note:hover {
-    width: 25vw;
-    height: 30vh;
-  }
-  .card-note:hover,
-  .card-forum:hover {
-    width: 35vh;
-    height: 25vh;
-  }
+  cursor: pointer;
 }

@@ -1,155 +1,109 @@
 import React from "react";
 import "../styles/project.css";
+import calc from "../assets/projects/calculator.jpg";
+import mobilenot from "../assets/projects/mobile-note.jpg";
+import not from "../assets/projects/note.jpg";
+import foru from "../assets/projects/forum.jpg";
 import { motion, useTime, useTransform } from "framer-motion";
+
 function ProjectPage() {
-  const [isVisible, setIsVisible] = React.useState(true);
-  const compRef = React.useRef(null);
-  React.useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(entry.isIntersecting);
-      },
-      {
-        threshold: 0.1,
+  const toggleClick = (id) => {
+    const elements = document.querySelectorAll(".wrapper");
+
+    elements.forEach((el) => {
+      if (el.id === id) {
+        el.classList.add("show");
+        el.classList.remove("notShow");
+
+        // Show the .article inside the clicked element
+        const article = el.querySelector(".article");
+        if (article) article.classList.add("show");
+      } else {
+        el.classList.add("notShow");
+        el.classList.remove("show");
+
+        // Hide the .article in other elements
+        const article = el.querySelector(".article");
+        if (article) article.classList.remove("show");
       }
-    );
+    });
+  };
 
-    if (compRef.current) {
-      observer.observe(compRef.current);
-    }
-    return () => {
-      observer.unobserve(compRef.current);
-    };
-  }, [compRef]);
+  const resetClick = (event) => {
+    event.stopPropagation(); // Prevents click from affecting parent elements
+    const elements = document.querySelectorAll(".wrapper");
 
-  const time = useTime();
-  const rotate = useTransform(time, [0, 3000], [0, 360], { clamp: false });
+    elements.forEach((el) => {
+      el.classList.remove("show", "notShow");
+
+      // Hide all articles when reset is clicked
+      const article = el.querySelector(".article");
+      if (article) article.classList.remove("show");
+    });
+  };
+
   return (
     <section className="project" id="Project">
-      <motion.div ref={compRef} className="project-page">
-        <motion.div
-          drag
-          dragConstraints={compRef}
-          ref={compRef}
-          className="card-calculator"
-          initial={{ scale: 0, opacity: 0, rotate: 180 }}
-          animate={
-            isVisible
-              ? { scale: 1, opacity: 1, rotate: 360 }
-              : { scale: 0, opacity: 0 }
-          }
-          transition={{
-            duration: 0.2,
-            type: "spring",
-          }}
-        >
-          <motion.img
-            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg"
-            title="Flutter"
-            alt="Flutter"
-            width="60"
-            height="60"
-            animate={{
-              rotate: [90, 90, 0, 90],
-              y: [100, -100, 0, 100],
-              borderRadius: ["50%", "50%", "0%", "50%"],
-            }}
-            transition={{
-              duration: 2,
-              ease: "easeInOut",
-              times: [0, 0.2, 0.5, 0.8, 1],
-              repeat: Infinity,
-              repeatDelay: 1,
-            }}
-          />
-        </motion.div>
-        <motion.div
-          drag
-          dragConstraints={compRef}
-          ref={compRef}
-          className="card-mobile-note"
-          initial={{ scale: 0, opacity: 0, rotate: 180 }}
-          animate={
-            isVisible
-              ? { scale: 1, opacity: 1, rotate: 360 }
-              : { scale: 0, opacity: 0 }
-          }
-          transition={{
-            duration: 0.5,
-            type: "spring",
-          }}
-        >
-          <motion.img
-            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/flutter/flutter-original.svg"
-            title="Flutter"
-            alt="Flutter"
-            width="60"
-            height="60"
-            animate={{
-              rotate: [90, 90, 0, 90],
-              y: [100, -100, 0, 100],
-              borderRadius: ["50%", "50%", "0%", "50%"],
-            }}
-            transition={{
-              duration: 2,
-              ease: "easeInOut",
-              times: [0, 0.2, 0.5, 0.8, 1],
-              repeat: Infinity,
-              repeatDelay: 1,
-            }}
-          />
-        </motion.div>
-        <motion.div
-          drag
-          dragConstraints={compRef}
-          ref={compRef}
-          className="card-note"
-          initial={{ scale: 0, opacity: 0, rotate: 180 }}
-          animate={
-            isVisible
-              ? { scale: 1, opacity: 1, rotate: 360 }
-              : { scale: 0, opacity: 0 }
-          }
-          transition={{
-            duration: 0.8,
-            type: "spring",
-          }}
-        >
-          <motion.img
-            style={{ rotate }}
-            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"
-            title="React"
-            alt="React"
-            width="60"
-            height="60"
-          />
-        </motion.div>
-        <motion.div
-          drag
-          dragConstraints={compRef}
-          ref={compRef}
-          className="card-forum"
-          initial={{ scale: 0, opacity: 0, rotate: 180 }}
-          animate={
-            isVisible
-              ? { scale: 1, opacity: 1, rotate: 360 }
-              : { scale: 0, opacity: 0 }
-          }
-          transition={{
-            duration: 1.1,
-            type: "spring",
-          }}
-        >
-          <motion.img
-            style={{ rotate }}
-            src="https://raw.githubusercontent.com/devicons/devicon/master/icons/react/react-original.svg"
-            title="React"
-            alt="React"
-            width="60"
-            height="60"
-          />
-        </motion.div>
-      </motion.div>
+      <div
+        className="wrapper calc"
+        id="calc"
+        onClick={() => toggleClick("calc")}
+      >
+        <div className="child">
+          <img src={calc} alt="calculator" />
+          <div className="article">
+            <h1>Calculator</h1>
+            <p>Made with Flutter</p>
+            <div className="closebt">
+              <button onClick={resetClick}>Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="wrapper mnote"
+        id="mnote"
+        onClick={() => toggleClick("mnote")}
+      >
+        <div className="child">
+          <img src={mobilenot} alt="calculator" />
+          <div className="article">
+            <h1>Mobile Note App</h1>
+            <p>A Mobile note that i made with flutter</p>
+            <div className="closebt">
+              <button onClick={resetClick}>Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="wrapper not" id="not" onClick={() => toggleClick("not")}>
+        <div className="child">
+          <img src={not} alt="calculator" />
+          <div className="article">
+            <h1>My Note App</h1>
+            <p>A note website that i made with react</p>
+            <div className="closebt">
+              <button onClick={resetClick}>Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="wrapper foru"
+        id="foru"
+        onClick={() => toggleClick("foru")}
+      >
+        <div className="child">
+          <img src={foru} alt="calculator" />
+          <div className="article">
+            <h1>Forum Online</h1>
+            <p>Made with React</p>
+            <div className="closebt">
+              <button onClick={resetClick}>Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
     </section>
   );
 }

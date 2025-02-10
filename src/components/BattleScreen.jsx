@@ -16,6 +16,23 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
   const [message, setMessage] = React.useState("");
   const [countdown, setCountdown] = React.useState(0);
 
+  const playerRef = React.useRef(null);
+  const opponentRef = React.useRef(null);
+
+  const applyShake = (ref) => {
+    if (ref.current) {
+      ref.current.classList.add("shake");
+      setTimeout(() => ref.current.classList.remove("shake"), 500);
+    }
+  };
+
+  const applyJump = (ref) => {
+    if (ref.current) {
+      ref.current.classList.add("jump");
+      setTimeout(() => ref.current.classList.remove("jump"), 500);
+    }
+  }
+
   const calculateDamage = (attacker, defender) => {
     const attack = attacker.stats[1].base_stat;
     const defense = defender.stats[2].base_stat;
@@ -31,8 +48,10 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
     if (playerTurn) {
       setMessage("");
       // Player's turn to attack
+      applyJump(playerRef);
       const damage = calculateDamage(playerPokemon, opponentPokemon);
       setOpponentHp((hp) => Math.max(0, hp - damage));
+      applyShake(opponentRef);
       setMessage(
         `${playerPokemon.name} dealt ${damage} damage to Opponent's ${opponentPokemon.name}!`
       );
@@ -40,8 +59,10 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
     } else {
       setMessage("");
       // Opponent's turn to attack
+      applyJump(opponentRef);
       const damage = calculateDamage(opponentPokemon, playerPokemon);
       setPlayerHp((hp) => Math.max(0, hp - damage));
+      applyShake(playerRef);
       setMessage(
         `${opponentPokemon.name} dealt ${damage} damage to Opponent's ${playerPokemon.name}!`
       );
@@ -53,8 +74,10 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
     if (playerTurn) {
       setMessage("");
       // Player's turn to attack
+      applyJump(playerRef);
       const damage = calculatespecialDamage(playerPokemon, opponentPokemon);
       setOpponentHp((hp) => Math.max(0, hp - damage));
+      applyShake(opponentRef);
       setMessage(
         `Special Attack ${playerPokemon.name} dealt ${damage} damage to Opponent's ${opponentPokemon.name}!`
       );
@@ -62,8 +85,10 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
     } else {
       setMessage("");
       // Opponent's turn to attack
+      applyJump(opponentRef);
       const damage = calculateDamage(opponentPokemon, playerPokemon);
       setPlayerHp((hp) => Math.max(0, hp - damage));
+      applyShake(playerRef);
       setMessage(
         `Special Attack ${opponentPokemon.name} dealt ${damage} damage to Opponent's ${playerPokemon.name}!`
       );
@@ -71,9 +96,23 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
     setPlayerTurn(!playerTurn);
   };
 
+  const UltimateAttack = () => {
+      setMessage("");
+      // Player's turn to attack
+      applyJump(playerRef);
+      const damage = 100;
+      setOpponentHp((hp) => Math.max(0, hp - damage));
+      applyShake(opponentRef);
+      setMessage(
+        `Ultimate Attack ${playerPokemon.name} dealt ${damage} damage to Opponent's ${opponentPokemon.name}!`
+      );
+      setCountdown(3);
+    setPlayerTurn(!playerTurn);
+  }
+
   React.useEffect(() => {
     if (playerHp === 0 || opponentHp === 0) {
-      const winner = playerHp === 0 ? opponentPokemon: playerPokemon;
+      const winner = playerHp === 0 ? opponentPokemon : playerPokemon;
       const batMessage = `Battle ended! ${winner.name} wins`;
       const timer = setTimeout(() => {
         onBattleEnd(batMessage, winner);
@@ -121,6 +160,7 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
           <div className="empty"></div>
           <div className="enemy-pokemon">
             <img
+              ref={opponentRef}
               src={opponentPokemon.sprites.front_default}
               alt={opponentPokemon.name}
             />
@@ -138,6 +178,7 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
         >
           <div className="player-pokemon">
             <img
+              ref={playerRef}
               src={playerPokemon.sprites.back_default}
               alt={playerPokemon.name}
             />
@@ -158,6 +199,13 @@ const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
           disabled={playerHp === 0 || opponentHp === 0 || !playerTurn}
         >
           {playerTurn ? `Sp Attack` : "Opponent's Turn"}
+        </button>
+
+        <button
+          onClick={UltimateAttack}
+          disabled={playerHp === 0 || opponentHp === 0 || !playerTurn}
+        >
+          {playerTurn ? `Ult Attack` : "Opponent's Turn"}
         </button>
       </div>
       <p>{message}</p>
