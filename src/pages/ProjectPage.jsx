@@ -5,7 +5,7 @@ import mobilenot from "../assets/projects/mobile-note.jpg";
 import not from "../assets/projects/note.jpg";
 import foru from "../assets/projects/forum.jpg";
 import { motion, useTime, useTransform } from "framer-motion";
-
+ 
 function ProjectPage() {
   const toggleClick = (id) => {
     const elements = document.querySelectorAll(".wrapper");
