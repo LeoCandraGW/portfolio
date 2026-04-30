@@ -1,110 +1,114 @@
 import React from "react";
-import "../styles/project.css";
-import calc from "../assets/projects/calculator.jpg";
-import mobilenot from "../assets/projects/mobile-note.jpg";
-import not from "../assets/projects/note.jpg";
-import foru from "../assets/projects/forum.jpg";
-import { motion, useTime, useTransform } from "framer-motion";
- 
+import { motion, AnimatePresence } from "framer-motion";
+import { PORTFOLIO_DATA } from "../data";
+
+// Since we can't easily dynamically require images with Vite in a mapped array without explicit imports,
+// we will import them here and map them.
+import calcImg from "../assets/projects/calculator.jpg";
+import mnoteImg from "../assets/projects/mobile-note.jpg";
+import notImg from "../assets/projects/note.jpg";
+import foruImg from "../assets/projects/forum.jpg";
+
+const imageMap = {
+  "calc": calcImg,
+  "mnote": mnoteImg,
+  "not": notImg,
+  "foru": foruImg
+};
+
 function ProjectPage() {
-  const toggleClick = (id) => {
-    const elements = document.querySelectorAll(".wrapper");
-
-    elements.forEach((el) => {
-      if (el.id === id) {
-        el.classList.add("show");
-        el.classList.remove("notShow");
-
-        // Show the .article inside the clicked element
-        const article = el.querySelector(".article");
-        if (article) article.classList.add("show");
-      } else {
-        el.classList.add("notShow");
-        el.classList.remove("show");
-
-        // Hide the .article in other elements
-        const article = el.querySelector(".article");
-        if (article) article.classList.remove("show");
-      }
-    });
-  };
-
-  const resetClick = (event) => {
-    event.stopPropagation(); // Prevents click from affecting parent elements
-    const elements = document.querySelectorAll(".wrapper");
-
-    elements.forEach((el) => {
-      el.classList.remove("show", "notShow");
-
-      // Hide all articles when reset is clicked
-      const article = el.querySelector(".article");
-      if (article) article.classList.remove("show");
-    });
-  };
+  const [selectedId, setSelectedId] = React.useState(null);
 
   return (
-    <section className="project" id="Project">
-      <div
-        className="wrapper calc"
-        id="calc"
-        onClick={() => toggleClick("calc")}
-      >
-        <div className="child">
-          <img src={calc} alt="calculator" />
-          <div className="article">
-            <h1>Calculator</h1>
-            <p>Made with Flutter</p>
-            <div className="closebt">
-              <button onClick={resetClick}>Close</button>
-            </div>
-          </div>
-        </div>
+    <motion.div 
+      className="hud-panel"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      style={{ maxWidth: "1000px", width: "95%", marginTop: "100px", padding: "40px" }}
+    >
+      <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid var(--hud-cyan)", paddingBottom: "10px", marginBottom: "30px" }}>
+        <h2 className="hud-title" style={{ color: "var(--hud-cyan)" }}>[DATABASE: PROJECTS]</h2>
+        <span className="blink mono" style={{ color: "var(--hud-red)" }}>ARCHIVES ENCRYPTED</span>
       </div>
-      <div
-        className="wrapper mnote"
-        id="mnote"
-        onClick={() => toggleClick("mnote")}
-      >
-        <div className="child">
-          <img src={mobilenot} alt="calculator" />
-          <div className="article">
-            <h1>Mobile Note App</h1>
-            <p>A Mobile note that i made with flutter</p>
-            <div className="closebt">
-              <button onClick={resetClick}>Close</button>
+
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))", gap: "25px" }}>
+        {PORTFOLIO_DATA.projects.map((project, index) => (
+          <motion.div 
+            key={index}
+            layoutId={`card-${index}`}
+            onClick={() => setSelectedId(index)}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: index * 0.1 }}
+            style={{
+              position: "relative",
+              border: "1px solid rgba(0, 243, 255, 0.3)",
+              cursor: "pointer",
+              background: "rgba(0,0,0,0.5)",
+              overflow: "hidden"
+            }}
+          >
+            {/* Tech tag corner */}
+            <div style={{ position: "absolute", top: "10px", right: "10px", background: "var(--hud-cyan)", color: "#000", padding: "2px 8px", fontSize: "12px", zIndex: 2 }} className="mono font-bold">
+              {project.tech}
             </div>
-          </div>
-        </div>
-      </div>
-      <div className="wrapper not" id="not" onClick={() => toggleClick("not")}>
-        <div className="child">
-          <img src={not} alt="calculator" />
-          <div className="article">
-            <h1>My Note App</h1>
-            <p>A note website that i made with react</p>
-            <div className="closebt">
-              <button onClick={resetClick}>Close</button>
+            
+            <motion.div style={{ width: "100%", height: "150px", overflow: "hidden" }}>
+              <img src={imageMap[project.image]} alt={project.title} style={{ width: "100%", height: "100%", objectFit: "cover", opacity: 0.6, filter: "grayscale(50%) sepia(100%) hue-rotate(180deg)" }} />
+            </motion.div>
+            
+            <div style={{ padding: "15px", borderTop: "1px solid rgba(0, 243, 255, 0.3)" }}>
+              <h3 className="mono" style={{ color: "var(--text-primary)" }}>{project.title}</h3>
             </div>
-          </div>
-        </div>
+          </motion.div>
+        ))}
       </div>
-      <div
-        className="wrapper foru"
-        id="foru"
-        onClick={() => toggleClick("foru")}
-      >
-        <div className="child">
-          <img src={foru} alt="calculator" />
-          <div className="article">
-            <h1>Forum Online</h1>
-            <p>Made with React</p>
-            <div className="closebt">
-              <button onClick={resetClick}>Close</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+
+      <AnimatePresence>
+        {selectedId !== null && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedId(null)}
+            style={{
+              position: "fixed",
+              top: 0, left: 0, right: 0, bottom: 0,
+              background: "rgba(0,0,0,0.8)",
+              backdropFilter: "blur(5px)",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              zIndex: 1000
+            }}
+          >
+            <motion.div
+              layoutId={`card-${selectedId}`}
+              onClick={(e) => e.stopPropagation()}
+              style={{
+                background: "var(--bg-primary)",
+                border: "2px solid var(--hud-cyan)",
+                padding: "20px",
+                width: "90%",
+                maxWidth: "600px",
+                boxShadow: "0 0 50px rgba(0, 243, 255, 0.2)"
+              }}
+            >
+              <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "20px" }}>
+                 <h2 className="hud-title" style={{ color: "var(--hud-cyan)" }}>{PORTFOLIO_DATA.projects[selectedId].title}</h2>
+                 <button onClick={() => setSelectedId(null)} className="mono" style={{ background: "none", border: "1px solid var(--hud-red)", color: "var(--hud-red)", padding: "5px 10px", cursor: "pointer" }}>[CLOSE]</button>
+              </div>
+              <img src={imageMap[PORTFOLIO_DATA.projects[selectedId].image]} style={{ width: "100%", border: "1px solid rgba(0,243,255,0.5)" }} alt="project" />
+              <div style={{ marginTop: "20px", display: "flex", justifyContent: "space-between" }}>
+                 <span className="mono" style={{ color: "var(--text-secondary)" }}>TECH: {PORTFOLIO_DATA.projects[selectedId].tech}</span>
+                 <span className="blink mono" style={{ color: "var(--hud-neon-yellow)" }}>ANALYSIS COMPLETE</span>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
   );
 }
 

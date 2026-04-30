@@ -2,7 +2,7 @@ import React from "react";
 import BattleScreen from "../components/BattleScreen";
 import { getPokemon } from "../components/FetchPokemon";
 import SelectionScreen from "../components/SelectionScreen";
-import "../styles/pokebattle.css";
+import { motion } from "framer-motion";
 
 function BattlePokemonPage() {
   const [playerPokemon, setPlayerPokemon] = React.useState(null);
@@ -39,9 +39,19 @@ function BattlePokemonPage() {
   };
 
   return (
-    <section className="PokeBattle" id="PokeBattle">
-      <div className="pokebattle-page">
-        <h1>pokemon Battle Simulator</h1>
+    <motion.div 
+      className="hud-panel"
+      initial={{ opacity: 0, scale: 0.95 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      style={{ maxWidth: "800px", width: "95%", marginTop: "100px" }}
+    >
+      <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid var(--hud-cyan)", paddingBottom: "10px", marginBottom: "20px" }}>
+        <h2 className="hud-title" style={{ color: "var(--hud-cyan)" }}>[SIMULATOR: COMBAT]</h2>
+        <span className="blink mono" style={{ color: "var(--hud-red)" }}>LIVE COMBAT FEED</span>
+      </div>
+
+      <div style={{ padding: "10px" }}>
         {!battleEnded ? (
           !playerPokemon ? (
             <SelectionScreen onSelect={setPlayerPokemon} />
@@ -53,19 +63,24 @@ function BattlePokemonPage() {
             />
           )
         ) : (
-          <>
+          <div style={{ textAlign: "center", padding: "40px" }}>
              <img
               src={winnerPokemon.sprites.front_default}
               alt={winnerPokemon.name}
+              style={{ width: "150px", filter: "drop-shadow(0 0 10px var(--hud-neon-yellow))" }}
             />
-            <p>{battleMessage}</p>
-            <button onClick={resetBattle} className="play-again">
-              Play Again
+            <h2 className="mono" style={{ color: "var(--hud-neon-yellow)", margin: "20px 0" }}>{battleMessage}</h2>
+            <button 
+              onClick={resetBattle} 
+              className="mono"
+              style={{ background: "var(--hud-cyan)", border: "none", color: "#000", padding: "10px 20px", cursor: "pointer", fontWeight: "bold" }}
+            >
+              INITIALIZE NEW SIMULATION
             </button>
-          </>
+          </div>
         )}
       </div>
-    </section>
+    </motion.div>
   );
 }
 

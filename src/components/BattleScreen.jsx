@@ -1,214 +1,168 @@
 import React from "react";
-import Pokemon from "../components/Pokemon";
 import HpBar from "./HpBar";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 const BattleScreen = ({ playerPokemon, opponentPokemon, onBattleEnd }) => {
-  const [playerHp, setPlayerHp] = React.useState(
-    playerPokemon.stats[0].base_stat
-  );
-  const [opponentHp, setOpponentHp] = React.useState(
-    opponentPokemon.stats[0].base_stat
-  );
-  const playerMaxHp = playerPokemon.stats[0].base_stat;
-  const opponentMaxHp = opponentPokemon.stats[0].base_stat;
-  const [playerTurn, setPlayerTurn] = React.useState(true);
-  const [message, setMessage] = React.useState("");
-  const [countdown, setCountdown] = React.useState(0);
+  const getStat = (pokemon, statName) => pokemon.stats.find(s => s.stat.name === statName)?.base_stat || 50;
 
-  const playerRef = React.useRef(null);
-  const opponentRef = React.useRef(null);
-
-  const applyShake = (ref) => {
-    if (ref.current) {
-      ref.current.classList.add("shake");
-      setTimeout(() => ref.current.classList.remove("shake"), 500);
-    }
+  const playerStats = {
+    hp: getStat(playerPokemon, "hp") * 2, // Multiply by 2 for longer battles
+    attack: getStat(playerPokemon, "attack"),
+    defense: getStat(playerPokemon, "defense"),
+    speed: getStat(playerPokemon, "speed"),
   };
 
-  const applyJump = (ref) => {
-    if (ref.current) {
-      ref.current.classList.add("jump");
-      setTimeout(() => ref.current.classList.remove("jump"), 500);
-    }
-  }
-
-  const calculateDamage = (attacker, defender) => {
-    const attack = attacker.stats[1].base_stat;
-    const defense = defender.stats[2].base_stat;
-    return Math.max(1, attack - defense);
-  };
-  const calculatespecialDamage = (attacker, defender) => {
-    const attack = attacker.stats[3].base_stat;
-    const defense = defender.stats[2].base_stat;
-    return Math.max(1, attack - defense);
+  const oppStats = {
+    hp: getStat(opponentPokemon, "hp") * 2,
+    attack: getStat(opponentPokemon, "attack"),
+    defense: getStat(opponentPokemon, "defense"),
+    speed: getStat(opponentPokemon, "speed"),
   };
 
-  const attack = () => {
-    if (playerTurn) {
-      setMessage("");
-      // Player's turn to attack
-      applyJump(playerRef);
-      const damage = calculateDamage(playerPokemon, opponentPokemon);
-      setOpponentHp((hp) => Math.max(0, hp - damage));
-      applyShake(opponentRef);
-      setMessage(
-        `${playerPokemon.name} dealt ${damage} damage to Opponent's ${opponentPokemon.name}!`
-      );
-      setCountdown(3);
+  const [playerHp, setPlayerHp] = React.useState(playerStats.hp);
+  const [opponentHp, setOpponentHp] = React.useState(oppStats.hp);
+  const [playerTurn, setPlayerTurn] = React.useState(playerStats.speed >= oppStats.speed);
+  
+  const [combatLog, setCombatLog] = React.useState([`> INITIALIZING COMBAT SIMULATION...`, `> ${playerPokemon.name.toUpperCase()} VS ${opponentPokemon.name.toUpperCase()}`]);
+  
+  // Extract 4 random moves
+  const [playerMoves, setPlayerMoves] = React.useState([]);
+  
+  React.useEffect(() => {
+    // Pick 4 random moves from the vast moves array
+    const moves = [...playerPokemon.moves].sort(() => 0.5 - Math.random()).slice(0, 4);
+    setPlayerMoves(moves.map(m => ({
+      name: m.move.name.replace("-", " ").toUpperCase(),
+      power: Math.floor(Math.random() * 60) + 40 // Simulated power 40-100
+    })));
+  }, [playerPokemon]);
+
+  const [animatingPlayer, setAnimatingPlayer] = React.useState(false);
+  const [animatingOpponent, setAnimatingOpponent] = React.useState(false);
+
+  const addLog = (msg) => {
+    setCombatLog(prev => [...prev.slice(-4), `> ${msg}`]);
+  };
+
+  const executeAttack = (attacker, defender, moveName, power, isPlayerAttack) => {
+    const damage = Math.max(1, Math.floor(((power * attacker.attack) / defender.defense) * (Math.random() * 0.4 + 0.8)));
+    
+    addLog(`${isPlayerAttack ? playerPokemon.name.toUpperCase() : opponentPokemon.name.toUpperCase()} EXECUTES [${moveName}]`);
+    addLog(`IMPACT REGISTERED: -${damage} INTEGRITY`);
+
+    if (isPlayerAttack) {
+      setAnimatingPlayer(true);
+      setTimeout(() => setAnimatingPlayer(false), 300);
+      setOpponentHp(hp => Math.max(0, hp - damage));
     } else {
-      setMessage("");
-      // Opponent's turn to attack
-      applyJump(opponentRef);
-      const damage = calculateDamage(opponentPokemon, playerPokemon);
-      setPlayerHp((hp) => Math.max(0, hp - damage));
-      applyShake(playerRef);
-      setMessage(
-        `${opponentPokemon.name} dealt ${damage} damage to Opponent's ${playerPokemon.name}!`
-      );
+      setAnimatingOpponent(true);
+      setTimeout(() => setAnimatingOpponent(false), 300);
+      setPlayerHp(hp => Math.max(0, hp - damage));
     }
-    setPlayerTurn(!playerTurn);
   };
 
-  const specialAttack = () => {
-    if (playerTurn) {
-      setMessage("");
-      // Player's turn to attack
-      applyJump(playerRef);
-      const damage = calculatespecialDamage(playerPokemon, opponentPokemon);
-      setOpponentHp((hp) => Math.max(0, hp - damage));
-      applyShake(opponentRef);
-      setMessage(
-        `Special Attack ${playerPokemon.name} dealt ${damage} damage to Opponent's ${opponentPokemon.name}!`
-      );
-      setCountdown(3);
-    } else {
-      setMessage("");
-      // Opponent's turn to attack
-      applyJump(opponentRef);
-      const damage = calculateDamage(opponentPokemon, playerPokemon);
-      setPlayerHp((hp) => Math.max(0, hp - damage));
-      applyShake(playerRef);
-      setMessage(
-        `Special Attack ${opponentPokemon.name} dealt ${damage} damage to Opponent's ${playerPokemon.name}!`
-      );
-    }
-    setPlayerTurn(!playerTurn);
+  const handlePlayerMove = (move) => {
+    if (!playerTurn) return;
+    executeAttack(playerStats, oppStats, move.name, move.power, true);
+    setPlayerTurn(false);
   };
-
-  const UltimateAttack = () => {
-      setMessage("");
-      // Player's turn to attack
-      applyJump(playerRef);
-      const damage = 100;
-      setOpponentHp((hp) => Math.max(0, hp - damage));
-      applyShake(opponentRef);
-      setMessage(
-        `Ultimate Attack ${playerPokemon.name} dealt ${damage} damage to Opponent's ${opponentPokemon.name}!`
-      );
-      setCountdown(3);
-    setPlayerTurn(!playerTurn);
-  }
 
   React.useEffect(() => {
     if (playerHp === 0 || opponentHp === 0) {
       const winner = playerHp === 0 ? opponentPokemon : playerPokemon;
-      const batMessage = `Battle ended! ${winner.name} wins`;
-      const timer = setTimeout(() => {
-        onBattleEnd(batMessage, winner);
-      }, 3000);
+      const batMessage = playerHp === 0 ? "SIMULATION FAILED. TARGET DESTROYED." : "VICTORY SECURED. TARGET ELIMINATED.";
+      addLog(batMessage);
+      setTimeout(() => onBattleEnd(batMessage, winner), 2500);
+      return;
+    }
 
+    if (!playerTurn && playerHp > 0 && opponentHp > 0) {
+      // Opponent AI (Wait 1.5s then attack)
+      const timer = setTimeout(() => {
+        const oppMoves = opponentPokemon.moves;
+        const randomMove = oppMoves[Math.floor(Math.random() * oppMoves.length)].move.name.replace("-", " ").toUpperCase();
+        const randomPower = Math.floor(Math.random() * 60) + 40;
+        executeAttack(oppStats, playerStats, randomMove, randomPower, false);
+        setPlayerTurn(true);
+      }, 1500);
       return () => clearTimeout(timer);
     }
-  }, [
-    playerHp,
-    opponentHp,
-    onBattleEnd,
-    playerPokemon.name,
-    opponentPokemon.name,
-  ]);
-
-  React.useEffect(() => {
-    if (!playerTurn && playerHp > 0 && opponentHp > 0 && countdown == 0) {
-      const opponentAttack = Math.random() < 0.05 ? specialAttack : attack;
-      opponentAttack();
-    }
-  }, [playerTurn, playerHp, opponentHp, attack, specialAttack]);
-
-  React.useEffect(() => {
-    if (countdown === 0) return;
-    const time = setInterval(() => {
-      setCountdown((prevCountDown) => prevCountDown - 1);
-    }, 1000);
-
-    return () => clearInterval(time);
-  }, [countdown]);
+  }, [playerTurn, playerHp, opponentHp]);
 
   return (
-    <div className="battle-screen">
-      <h2>Battle Screen</h2>
-      <p>{countdown}</p>
-      <div className="players">
-        <motion.div
-          className="row-enemy"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            duration: 2,
-          }}
+    <div style={{ width: "100%", display: "flex", flexDirection: "column", gap: "20px" }}>
+      
+      {/* COMBAT ARENA */}
+      <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", border: "1px solid var(--hud-cyan)", padding: "20px", background: "rgba(0,0,0,0.4)" }}>
+        
+        <motion.div 
+          animate={animatingPlayer ? { x: [0, 20, -20, 0], filter: "brightness(2)" } : {}}
+          style={{ width: "40%", textAlign: "center" }}
         >
-          <div className="empty"></div>
-          <div className="enemy-pokemon">
-            <img
-              ref={opponentRef}
-              src={opponentPokemon.sprites.front_default}
-              alt={opponentPokemon.name}
-            />
-            <HpBar currentHp={opponentHp} maxHp={opponentMaxHp} />
-          </div>
+          <span className="mono" style={{ color: "var(--hud-cyan)", textTransform: "uppercase" }}>{playerPokemon.name}</span>
+          <HpBar currentHp={playerHp} maxHp={playerStats.hp} />
+          <img 
+            src={playerPokemon.sprites.back_default || playerPokemon.sprites.front_default} 
+            alt={playerPokemon.name} 
+            style={{ width: "120px", filter: "drop-shadow(0 0 10px var(--hud-cyan))" }} 
+          />
         </motion.div>
-        <motion.div
-          className="row-player"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{
-            duration: 2,
-            delay: 1,
-          }}
-        >
-          <div className="player-pokemon">
-            <img
-              ref={playerRef}
-              src={playerPokemon.sprites.back_default}
-              alt={playerPokemon.name}
-            />
-            <HpBar currentHp={playerHp} maxHp={playerMaxHp} />
-          </div>
-          <div className="empty"></div>
-        </motion.div>
-      </div>
-      <div className="att-button">
-        <button
-          onClick={attack}
-          disabled={playerHp === 0 || opponentHp === 0 || !playerTurn}
-        >
-          {playerTurn ? `Normal Attack` : "Opponent's Turn"}
-        </button>
-        <button
-          onClick={specialAttack}
-          disabled={playerHp === 0 || opponentHp === 0 || !playerTurn}
-        >
-          {playerTurn ? `Sp Attack` : "Opponent's Turn"}
-        </button>
 
-        <button
-          onClick={UltimateAttack}
-          disabled={playerHp === 0 || opponentHp === 0 || !playerTurn}
+        <div className="mono" style={{ color: "var(--hud-red)", fontSize: "24px", animation: "blink 1s infinite" }}>VS</div>
+
+        <motion.div 
+          animate={animatingOpponent ? { x: [0, -20, 20, 0], filter: "brightness(2) hue-rotate(90deg)" } : {}}
+          style={{ width: "40%", textAlign: "center" }}
         >
-          {playerTurn ? `Ult Attack` : "Opponent's Turn"}
-        </button>
+          <span className="mono" style={{ color: "var(--hud-red)", textTransform: "uppercase" }}>{opponentPokemon.name}</span>
+          <HpBar currentHp={opponentHp} maxHp={oppStats.hp} />
+          <img 
+            src={opponentPokemon.sprites.front_default} 
+            alt={opponentPokemon.name} 
+            style={{ width: "120px", filter: "drop-shadow(0 0 10px var(--hud-red))" }} 
+          />
+        </motion.div>
       </div>
-      <p>{message}</p>
+
+      {/* COMBAT LOG */}
+      <div style={{ border: "1px dashed var(--hud-neon-yellow)", padding: "10px", height: "100px", overflow: "hidden", background: "rgba(255, 255, 0, 0.05)" }}>
+        <AnimatePresence>
+          {combatLog.map((log, i) => (
+            <motion.p 
+              key={i} 
+              initial={{ opacity: 0, x: -20 }} 
+              animate={{ opacity: 1, x: 0 }} 
+              className="mono" 
+              style={{ color: "var(--hud-neon-yellow)", margin: "5px 0", fontSize: "12px" }}
+            >
+              {log}
+            </motion.p>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      {/* COMMAND INTERFACE */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: "10px" }}>
+        {playerMoves.map((move, i) => (
+          <button
+            key={i}
+            onClick={() => handlePlayerMove(move)}
+            disabled={!playerTurn || playerHp === 0 || opponentHp === 0}
+            className="mono"
+            style={{
+              padding: "15px",
+              background: playerTurn ? "rgba(0, 243, 255, 0.1)" : "rgba(100, 100, 100, 0.1)",
+              border: `1px solid ${playerTurn ? "var(--hud-cyan)" : "#555"}`,
+              color: playerTurn ? "var(--hud-cyan)" : "#555",
+              cursor: playerTurn ? "pointer" : "not-allowed",
+              textTransform: "uppercase",
+              fontSize: "14px"
+            }}
+          >
+            EXECUTE: {move.name}
+          </button>
+        ))}
+      </div>
     </div>
   );
 };

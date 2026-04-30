@@ -1,31 +1,128 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&family=Inter:wght@300;400;600&display=swap");
+
+:root {
+  /* Sci-Fi Color Palette */
+  --bg-primary: #050a12;
+  --hud-cyan: #00f3ff;
+  --hud-blue: #0277bd;
+  --hud-neon-yellow: #e4ff00;
+  --hud-red: #ff2a2a;
+  --text-primary: #e0f7fa;
+  --text-secondary: #84ffff;
+  --grid-color: rgba(0, 243, 255, 0.1);
+  --glass-bg: rgba(5, 10, 18, 0.6);
+  --hud-border: 1px solid rgba(0, 243, 255, 0.3);
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: input-mono, monospace;
-  scroll-behavior: smooth;
-  /* scroll-snap-type: y mandatory; */
-}
-::-webkit-scrollbar {
-  width: 0px;
-}
-body {
-  background-color: transparent;
-  min-height: 100vh;
-}
-footer{
-  height: 20vh;
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: #ecf0f1;
 }
 
-.tech-stack{
-  padding: 10px;
+body {
+  font-family: "Inter", sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  overflow: hidden; /* Hide scrollbars for the HUD experience */
+  user-select: none;
+}
+
+/* Sci-Fi Typography */
+h1, h2, h3, h4, h5, h6, .hud-title {
+  font-family: "Orbitron", sans-serif;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.hud-data, .mono {
+  font-family: "Share Tech Mono", monospace;
+}
+
+/* Base HUD Container */
+.hud-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 100;
   display: flex;
-  flex-direction: row;
   align-items: center;
+  justify-content: center;
+}
+
+/* Make inner elements clickable */
+.hud-container * {
+  pointer-events: auto;
+}
+
+/* Glitch and Scanline Effects */
+.scanlines {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: linear-gradient(
+    to bottom,
+    rgba(255,255,255,0),
+    rgba(255,255,255,0) 50%,
+    rgba(0,0,0,0.1) 50%,
+    rgba(0,0,0,0.1)
+  );
+  background-size: 100% 4px;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.3;
+}
+
+.hud-panel {
+  background: var(--glass-bg);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: var(--hud-border);
+  box-shadow: 0 0 20px rgba(0, 243, 255, 0.1), inset 0 0 20px rgba(0, 243, 255, 0.05);
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Sci-fi corners */
+.hud-panel::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 20px; height: 20px;
+  border-top: 2px solid var(--hud-cyan);
+  border-left: 2px solid var(--hud-cyan);
+}
+.hud-panel::after {
+  content: '';
+  position: absolute;
+  bottom: 0; right: 0;
+  width: 20px; height: 20px;
+  border-bottom: 2px solid var(--hud-cyan);
+  border-right: 2px solid var(--hud-cyan);
+}
+
+/* Animations */
+@keyframes blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+
+.blink {
+  animation: blink 1s infinite;
+}
+
+::-webkit-scrollbar {
+  width: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--hud-cyan);
 }

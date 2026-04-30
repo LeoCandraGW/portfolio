@@ -1,7 +1,5 @@
 import React from "react";
 import Pokemon from "../components/Pokemon";
-import "../styles/pokemon.css";
-import { section } from "framer-motion/client";
 import { motion } from "framer-motion";
 import { FaHandPointDown } from "react-icons/fa";
 
@@ -33,15 +31,15 @@ function PokemonPage() {
 
   const handleGuessSubmit = (e) => {
     e.preventDefault();
-    if (guess.length == 0) {
-      setMessage("Make some guess!");
+    if (guess.length === 0) {
+      setMessage("INPUT REQUIRED.");
       return;
     }
     if (guess.toLowerCase() === pokemon.name.toLowerCase()) {
       setScore(score + 1);
-      setMessage(`Correct! It's ${pokemon.name}`);
+      setMessage(`MATCH FOUND: ${pokemon.name.toUpperCase()}`);
     } else {
-      setMessage(`Oops! It's ${pokemon.name}`);
+      setMessage(`INCORRECT. IDENTITY: ${pokemon.name.toUpperCase()}`);
     }
     setTimeout(fetchRandomPokemon, 2000);
   };
@@ -54,32 +52,72 @@ function PokemonPage() {
   };
 
   return (
-    <section className="PokeApp" id="PokeApp">
-      <motion.div ref={ConstraintsRef} className="pokemon-page">
-        <h1>What is that Pokémon!</h1>
-        <h2>Score : {score}</h2>
-        <motion.div drag dragConstraints={ConstraintsRef}>
+    <motion.div 
+      className="hud-panel"
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.5 }}
+      style={{ maxWidth: "600px", width: "90%", marginTop: "100px", textAlign: "center" }}
+    >
+      <div style={{ display: "flex", justifyContent: "space-between", borderBottom: "1px solid var(--hud-cyan)", paddingBottom: "10px", marginBottom: "20px" }}>
+        <h2 className="hud-title" style={{ color: "var(--hud-cyan)" }}>[SIMULATOR: IDENTIFY]</h2>
+        <span className="mono" style={{ color: "var(--hud-neon-yellow)" }}>SCORE: {score}</span>
+      </div>
+
+      <motion.div ref={ConstraintsRef} style={{ padding: "20px" }}>
+        <motion.div drag dragConstraints={ConstraintsRef} style={{ cursor: "grab", display: "inline-block", border: "1px dashed var(--hud-cyan)", padding: "20px", background: "rgba(0,243,255,0.05)" }}>
           {pokemon && <Pokemon pokemon={pokemon} />}
         </motion.div>
-        <div className="hint">
-          <h1>{pokename}</h1>
-          <button type="button" onClick={handleHintPress}>
-            Hint!
+        
+        <div style={{ margin: "20px 0" }}>
+          <h1 className="mono" style={{ letterSpacing: "5px", color: "var(--text-primary)" }}>{pokename.toUpperCase()}</h1>
+          <button 
+            type="button" 
+            onClick={handleHintPress}
+            className="mono"
+            style={{ marginTop: "10px", background: "transparent", border: "1px solid var(--hud-neon-yellow)", color: "var(--hud-neon-yellow)", padding: "5px 15px", cursor: "pointer" }}
+          >
+            REQUEST HINT
           </button>
         </div>
-        <form onSubmit={handleGuessSubmit}>
+
+        <form onSubmit={handleGuessSubmit} style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "center" }}>
           <input
             type="text"
-            placeholder="Enter Pokémon name"
+            placeholder="ENTER ENTITY NAME"
             value={guess}
             onChange={(e) => setGuess(e.target.value)}
+            className="mono"
+            style={{ 
+              background: "transparent", 
+              border: "1px solid var(--hud-cyan)", 
+              color: "var(--hud-cyan)", 
+              padding: "10px", 
+              width: "80%", 
+              textAlign: "center",
+              outline: "none"
+            }}
           />
-          <button type="submit">Submit Guess</button>
+          <button 
+            type="submit"
+            className="mono"
+            style={{ background: "var(--hud-cyan)", border: "none", color: "#000", padding: "10px 20px", cursor: "pointer", fontWeight: "bold" }}
+          >
+            EXECUTE SCAN
+          </button>
         </form>
-        <p>{message}</p>
-        <p><FaHandPointDown /> Scroll for battle simulator</p>
+
+        <p className="mono" style={{ marginTop: "20px", color: message.includes("INCORRECT") ? "var(--hud-red)" : "var(--hud-cyan)" }}>
+          {message}
+        </p>
+
+        <a href="#Battle" style={{ textDecoration: "none" }}>
+          <p className="mono" style={{ marginTop: "30px", color: "var(--text-secondary)", fontSize: "12px", cursor: "pointer" }}>
+            <FaHandPointDown /> SWITCH TO COMBAT SIMULATOR
+          </p>
+        </a>
       </motion.div>
-    </section>
+    </motion.div>
   );
 }
 

@@ -1,73 +1,20 @@
 import React from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 function Navigation() {
   const location = useLocation();
-  const [activeSection, setActiveSection] = React.useState(location.hash);
-  const [isOpen, setIsOpen] = React.useState(true);
-
-  React.useEffect(() => {
-    if (window.location.pathname === "/" && window.location.hash === "") {
-      setActiveSection("#Home");
-    }
-  }, []);
-
-  const handleResize = () => {
-    if (window.innerWidth <= 576) {
-      setIsOpen(false);
-    }
-  };
-  
-  React.useEffect(()=>{
-    handleResize();
-
-    window.addEventListener('resize', handleResize)
-
-    return()=>{
-      window.removeEventListener('resize', handleResize)
-    }
-  },[])
-
-  const handleNavClick = (path) => {
-    setActiveSection(path);
-  };
-
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
-
-  const NavLinks = [
-    { path: "#Home", label: "Home" },
-    { path: "#About", label: "About" },
-    { path: "#Experience", label: "Experience" },
-    { path: "#Project", label: "Project" },
-    { path: "#Quote", label: "Quote" },
-    { path: "#PokeApp", label: "Pokémon" },
-  ];
+  const hash = location.hash || "#Home";
 
   return (
-    <div className="navigation">
-      <div className={`nav-links ${isOpen ? "show" : ""} borderXwidth`}>
-        {NavLinks.map(({ path, label }) => (
-          <a
-            key={path}
-            href={path}
-            onClick={() => handleNavClick(path)}
-            className={activeSection === path ? "active" : ""}
-          >
-            {label}
-          </a>
-        ))}
-      </div>
-      <button
-        className={`hamburger ${isOpen ? "open" : ""}`}
-        onClick={toggleMenu}
-      >
-        <span className="bar"></span>
-        <span className="bar"></span>
-        <span className="bar"></span>
-      </button>
-    </div>
+    <nav className="nav-hud">
+      <a href="#Home" className={hash === "#Home" ? "active" : ""}>SYS_HOME</a>
+      <a href="#About" className={hash === "#About" ? "active" : ""}>USR_DATA</a>
+      <a href="#Skill" className={hash === "#Skill" ? "active" : ""}>TECH_SPEC</a>
+      <a href="#Experience" className={hash === "#Experience" ? "active" : ""}>FLIGHT_LOG</a>
+      <a href="#Project" className={hash === "#Project" ? "active" : ""}>DATABASE</a>
+      <a href="#PokeApp" className={hash === "#PokeApp" ? "active" : ""}>ENTITY_SCAN</a>
+      <a href="#Battle" className={hash === "#Battle" ? "active" : ""}>COMBAT_SIM</a>
+    </nav>
   );
 }
 
